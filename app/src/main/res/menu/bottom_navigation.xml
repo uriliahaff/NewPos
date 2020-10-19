@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+    android:id="@+id/nav_home"
+        android:enabled="true"
+    android:icon="@drawable/ic_home_black_24dp"
+    android:title="@string/Home"/>
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/ic_person_black_24dp"
+        android:enabled="true"
+        android:title="@string/My_Profile"/>
+    <item
+        android:id="@+id/nav_jobs"
+        android:enabled="true"
+        android:icon="@drawable/ic_business_center_black_24dp"
+        android:title="@string/Jobs"/>
+    <item
+        android:id="@+id/nav_aplicant"
+        android:enabled="true"
+        android:icon="@drawable/ic_supervisor_account_black_24dp"
+        android:title="@string/Applications"/>
+    <item
+        android:id="@+id/nav_more"
+        android:enabled="true"
+        android:icon="@drawable/ic_menu_black_24dp"
+        android:title="@string/More"/>
+
+</menu>

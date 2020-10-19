@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "483098634531",
+    "firebase_url": "https://newpos-8b585.firebaseio.com",
+    "project_id": "newpos-8b585",
+    "storage_bucket": "newpos-8b585.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:483098634531:android:07b7b6401ecb81d0758496",
+        "android_client_info": {
+          "package_name": "com.example.newpos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "483098634531-j2e177k50g3q57j1863qh9mf99gp27fe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.newpos",
+            "certificate_hash": "a197dae797a326002bdf9d64cb2d298e6b3f774b"
+          }
+        },
+        {
+          "client_id": "483098634531-m168tl7kaiad7ldjv4kidd951cafre91.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDx8mzpQNtjqajRCsCJzwdASS47JXMbEYA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "483098634531-m168tl7kaiad7ldjv4kidd951cafre91.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
