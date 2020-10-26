@@ -27,6 +27,9 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -73,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<itemCV> itemsEducacion,itemsExp,itemsSkills,itemsIdi;
     BottomNavigationView bottomNav;
     TextView txtBarra;
+    public String Mail,Password;
+    private FirebaseAuth mAuth;
     ConstraintLayout barra;
     @Override
    //OnCreate
@@ -81,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //Bottom navbar
         auxiliarPostulacion=-1;
+
          bottomNav=findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener( navListener);
         txtBarra=findViewById(R.id.textViewBarra);
@@ -104,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
         mostarNavBar();
         itemEditar=new itemCV();
         jobEditar=new job();
+        mAuth=FirebaseAuth.getInstance();
     }
 
     public void mostarNavBar(){
@@ -377,6 +384,7 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
 
     //Cargo el login de password
     public void login1(View view){
+
         Log.d("Fragment","Llegue");
         fragLogin2 miFragDeIngreso=new fragLogin2();
         TransaccionesDeFragment=AdminFragments.beginTransaction();
@@ -385,6 +393,37 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
         fragment=3;
     }
 
+    public void enviarMail(String mail){
+       Mail=mail;
+       Log.d("enviarDatosUser",Mail);
+    }
+
+    public void enviarPassword(String password){
+        Password=password;
+        Log.d("enviarDatosUser",Password);
+        if(Mail.isEmpty()&&Password.isEmpty()){
+        iniciarSesion();}
+        else{
+            Log.d("enviarDatosUser","No se cargo");
+login(null);
+        }
+    }
+
+    private void iniciarSesion() {
+        mAuth.signInWithEmailAndPassword(Mail,Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    Log.d("iniciarSesion","Inicio de Sesion completado");
+                    irHome(null);
+                }
+                else{
+                    Log.d("iniciarSesion","Inicio de Sesion fallido");
+                    login(null);
+                }
+            }
+        });
+    }
     //Cargo el fragment de registro
     public void register1(View view){
         Log.d("Fragment","Llegue");
@@ -1670,5 +1709,10 @@ if(fragment==292){fragment=312;}
     public int enviarPosicionFecha(){
         Log.d("enviarPosicionFecha",fechas+"");
         return fechas;
+    }
+    public void logOut(View v){
+        Log.d("logOut","Vamo a cerrar sesion");
+    mAuth.signOut();
+    login(null);
     }
 }
