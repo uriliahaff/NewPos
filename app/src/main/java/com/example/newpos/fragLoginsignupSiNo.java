@@ -22,6 +22,10 @@ public class fragLoginsignupSiNo extends Fragment  {
     public View onCreateView(LayoutInflater inflador, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View VistaADevolver;
         VistaADevolver=inflador.inflate(R.layout.signup_login_sino, container, false);
+        final MainActivity actPrincipal;
+        actPrincipal=(MainActivity) getActivity();
+        //Muestro popUp
+        actPrincipal.mostrarPopUp();
         return VistaADevolver;
     }
 }

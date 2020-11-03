@@ -401,11 +401,10 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
     public void enviarPassword(String password){
         Password=password;
         Log.d("enviarDatosUser",Password);
-        if(Mail.isEmpty()&&Password.isEmpty()){
-        iniciarSesion();}
+        if(Mail.isEmpty()&&Password.isEmpty()){             Log.d("enviarDatosUser","No se cargo");
+            login(null);}
         else{
-            Log.d("enviarDatosUser","No se cargo");
-login(null);
+            iniciarSesion();
         }
     }
 
@@ -1561,11 +1560,9 @@ if(fragment==292){fragment=312;}
     //Para cerrar sesion
     public void LogOut (View view)
     {
-        fragAcerca miFragDeIngreso=new fragAcerca();
-        TransaccionesDeFragment=AdminFragments.beginTransaction();
-        TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
-        TransaccionesDeFragment.commit();
-        fragment=1;
+        Log.d("logOut","Vamo a cerrar sesion");
+        mAuth.signOut();
+        mostrarInicio();
     }
 
     //Funcion para enviar la lista de postulaciones
@@ -1709,10 +1706,5 @@ if(fragment==292){fragment=312;}
     public int enviarPosicionFecha(){
         Log.d("enviarPosicionFecha",fechas+"");
         return fechas;
-    }
-    public void logOut(View v){
-        Log.d("logOut","Vamo a cerrar sesion");
-    mAuth.signOut();
-    login(null);
     }
 }
