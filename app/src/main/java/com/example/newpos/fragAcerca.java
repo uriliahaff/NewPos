@@ -2,9 +2,11 @@ package com.example.newpos;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 
@@ -17,7 +19,7 @@ int i;
     @Override
     public View onCreateView(LayoutInflater inflador, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View VistaADevolver=null;
-        MainActivity actPrincipal;
+        final MainActivity actPrincipal;
         actPrincipal=(MainActivity) getActivity();
         //Muestro popUp
         i = actPrincipal.obtenerConfigActual();
@@ -27,6 +29,13 @@ int i;
         }
         if (i == 2) {
             VistaADevolver = inflador.inflate(R.layout.acerca_intelectual, container, false);
+            LinearLayout ln = VistaADevolver.findViewById(R.id.signOut);
+            ln.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    Log.d("itemEditar","Se pulso");
+                    actPrincipal.LogOut(null);
+                }
+            });
         }
         return VistaADevolver;
     }

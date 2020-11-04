@@ -51,6 +51,13 @@ public class fragVerPerfilCv extends Fragment  {
         }
         if (i == 2) {
             VistaADevolver=inflador.inflate(R.layout.ver_perfil_cv_intelectual, container, false);
+
+            User usuario=actPrincipal.enviarUsuario();
+
+            TextView txtName=VistaADevolver.findViewById(R.id.textViewNombre);
+            String nombre= usuario.get_userName()+" "+usuario.get_userLastName();
+            txtName.setText(nombre);
+
             arrayListEducacion=actPrincipal.obtenerListaEducacion();
             arrayListExperiencia=actPrincipal.obtenerListaExperiencia();
             arrayListSkills=actPrincipal.obtenerListaSkills();

@@ -32,13 +32,13 @@ public class User {
     //userId
     public String get_userid (){return userId;}
 
-    //itemCVTypeId
-    public String get_itemCVTypeId (){return userId;}
-    public void set_itemCVTypeId (String itemCVTypeId){this.userId=itemCVTypeId;}
+    //userName
+    public String get_userName (){return userName;}
+    public void set_userName (String userName){this.userName=userName;}
 
-    //itemCVTittle
-    public String get_itemCVTittle (){return userId;}
-    public void set_itemCVTittle (String itemCVTittle){this.userId=itemCVTittle;}
+    //userLastName
+    public String get_userLastName(){return userLastName;}
+    public void set_userLastName (String userLastName){this.userLastName=userLastName;}
 
     //itemCVStart
     public String get_itemCVStart (){return userId;}

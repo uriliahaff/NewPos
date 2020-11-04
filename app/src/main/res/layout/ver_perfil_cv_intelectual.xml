@@ -30,13 +30,13 @@
             app:civ_border_width="0dp" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/textViewNombre"
             android:textSize="20sp"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Uriel Liahaff" />
+            android:text="Nombre Apellido" />
 
     </LinearLayout>
 

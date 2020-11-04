@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -53,6 +55,7 @@ import nl.dionsegijn.konfetti.models.Size;
 public class MainActivity extends AppCompatActivity {
    //Declaro variables
     itemCV item,itemOther,itemEditar;
+    User user;
     String tituloEditar,subtituloEditar,primeraFechaEditar,segundaFechaEditar,habilidadEditar;
     ArrayList<itemCV> itemCVList;
     ArrayList<postulation> itemPostulations;
@@ -98,15 +101,15 @@ public class MainActivity extends AppCompatActivity {
         itemsEducacion=new ArrayList<>();itemsExp=new ArrayList<>();itemsSkills=new ArrayList<>();itemsIdi=new ArrayList<>();
         item = new itemCV();
         usuario=new User();
-        auxiliar= "newposdevelopers";
+        auxiliar= null;
         arrayAuxiliar=new ArrayList<job>();
+        configuracionActual=1;
         mostrarInicio();
         mostrarPopUp();
         key="key";
         primeraFechaEditar=null;
         segundaFechaEditar=null;
         fechas=0;
-        configuracionActual=1;
         mostarNavBar();
         itemEditar=new itemCV();
         jobEditar=new job();
@@ -401,8 +404,15 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
     public void enviarPassword(String password){
         Password=password;
         Log.d("enviarDatosUser",Password);
-        if(Mail.isEmpty()&&Password.isEmpty()){             Log.d("enviarDatosUser","No se cargo");
-            login(null);}
+        if(Mail.isEmpty()&&Password.isEmpty()){
+            Log.d("enviarDatosUser","No se cargo");
+            if (configuracionActual==1){
+                login(null);
+            }
+            if (configuracionActual==2){
+                mostrarInicio();
+            }
+        }
         else{
             iniciarSesion();
         }
@@ -412,17 +422,56 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
         mAuth.signInWithEmailAndPassword(Mail,Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    Log.d("iniciarSesion","Inicio de Sesion completado");
-                    irHome(null);
-                }
-                else{
-                    Log.d("iniciarSesion","Inicio de Sesion fallido");
-                    login(null);
+                if(task.isSuccessful()) {
+                    Log.d("iniciarSesion", "Inicio de Sesion completado");
+                    InputMethodManager imm = (InputMethodManager) getSystemService(MainActivity.INPUT_METHOD_SERVICE);
+//Hide:
+                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                    traerUsuario();
                 }
             }
         });
     }
+
+    public void traerUsuario(){
+        final ProgressDialog mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setMessage("Cargando...");
+        mProgressDialog.show();
+        String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        db.collection("user").whereEqualTo("id", currentuser).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("traerUsuario", document.getId() + " => " + document.getData());
+                                 user = new User();
+                                auxiliar=document.getId();
+                                user.set_userName((String) document.get("userName"));
+                                user.set_userLastName((String) document.get("userLastname"));
+
+                                mProgressDialog.dismiss();
+                                irHome(null);
+                                if (configuracionActual==2){
+                                    mostarNavBar();
+                                    bottomNav.setOnNavigationItemSelectedListener(navListener);
+                                    bottomNav.setSelectedItemId(R.id.nav_home);
+                                }
+
+                            }
+                        } else {
+                            Log.d("traerItems", "Error getting documents: ", task.getException());
+                            mProgressDialog.dismiss();
+                        }
+                        analizarItems();
+                    }
+                });
+    }
+
+    public User enviarUsuario(){
+        return user;
+    }
+
     //Cargo el fragment de registro
     public void register1(View view){
         Log.d("Fragment","Llegue");
@@ -491,8 +540,8 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
     TransaccionesDeFragment=AdminFragments.beginTransaction();
     TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
     TransaccionesDeFragment.commit();
-       String sTexto=getString(R.string.Home);
-        txtBarra.setText(sTexto);
+    String sTexto=getString(R.string.Home);
+    txtBarra.setText(sTexto);
     }
 
     public ArrayList<itemCV> obtenerListaEducacion(){
@@ -1562,6 +1611,8 @@ if(fragment==292){fragment=312;}
     {
         Log.d("logOut","Vamo a cerrar sesion");
         mAuth.signOut();
+        bottomNav.setVisibility(View.GONE);
+        barra.setVisibility(View.GONE);
         mostrarInicio();
     }
 

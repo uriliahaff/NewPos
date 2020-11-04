@@ -50,6 +50,7 @@ int i;
             TextView txt = actPrincipal.findViewById(R.id.textViewBarra);
             txt.setText(getString(R.string.EditCV));
             VistaADevolver = inflador.inflate(R.layout.edit_cv_intelectual, container, false);
+
             arrayListEducacion = actPrincipal.obtenerListaEducacion();
             arrayListExperiencia = actPrincipal.obtenerListaExperiencia();
             arrayListSkills = actPrincipal.obtenerListaSkills();

@@ -313,7 +313,7 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="logOut"
+                    android:id="@+id/signOut"
                     android:orientation="horizontal">
 
                     <ImageView
