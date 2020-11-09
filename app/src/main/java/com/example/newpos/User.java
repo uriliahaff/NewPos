@@ -11,6 +11,7 @@ public class User {
     private String userResidenceCountry;
     private String userProvince;
     private String userStreet;
+    private String userProfilePicture;
     private String userAddress;
     private int userPhoneNumber;
     private int userTelephoneNumber;
@@ -40,9 +41,9 @@ public class User {
     public String get_userLastName(){return userLastName;}
     public void set_userLastName (String userLastName){this.userLastName=userLastName;}
 
-    //itemCVStart
-    public String get_itemCVStart (){return userId;}
-    public void set_itemCVStart (String itemCVStart){this.userId=itemCVStart;}
+    //userProfilePicture
+    public String get_userProfilePicture (){return userProfilePicture;}
+    public void set_userProfilePicture (String userProfilePicture){this.userProfilePicture=userProfilePicture;}
 
     //itemCVEnd
     public String get_itemCVEnd(){return userId;}

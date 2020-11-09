@@ -1,16 +1,26 @@
 package com.example.newpos;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.Manifest;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -39,7 +49,11 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -59,9 +73,13 @@ public class MainActivity extends AppCompatActivity {
     String tituloEditar,subtituloEditar,primeraFechaEditar,segundaFechaEditar,habilidadEditar;
     ArrayList<itemCV> itemCVList;
     ArrayList<postulation> itemPostulations;
+    int codigoPedirPermiso;
+    boolean editarImagen=false;
     User usuario;
     String auxiliar;
     int iEditItem;
+    Bitmap bEditar;
+    Bitmap foto;
     int fechas,auxiliarPostulacion;
     job jobEditar;
     FrameLayout frame;
@@ -69,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
     FragmentManager AdminFragments;
     String key;
     ArrayList<job> arrayAuxiliar;
+    int codigoLlamadaFoto=1;
+    int codigoLlamadaElegirFoto=2;
+    Bitmap imagenActual;
     FragmentTransaction TransaccionesDeFragment;
     private FirebaseFirestore db;
     int fragment;
@@ -82,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
     public String Mail,Password;
     private FirebaseAuth mAuth;
     ConstraintLayout barra;
+    FirebaseStorage storage;
     @Override
    //OnCreate
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //Bottom navbar
         auxiliarPostulacion=-1;
-
+         storage = FirebaseStorage.getInstance();
          bottomNav=findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener( navListener);
         txtBarra=findViewById(R.id.textViewBarra);
@@ -127,6 +149,10 @@ public class MainActivity extends AppCompatActivity {
         }
         }
 
+
+        public void recibirProfile(Bitmap bp){
+        imagenActual=bp;
+        }
 
 private BottomNavigationView.OnNavigationItemSelectedListener navListener=
         new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -433,6 +459,18 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
         });
     }
 
+
+    public void irEditarProfilePicture(View view){
+        bottomNav.setVisibility(View.GONE);
+        Log.d("irEditarProfilePicture", "Se pulso para editar la foto");
+        fragEditarProfilePicture miFragDeIngreso=new fragEditarProfilePicture();
+        TransaccionesDeFragment=AdminFragments.beginTransaction();
+        TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
+        TransaccionesDeFragment.commit();
+        fragment=999;
+        txtBarra.setText("Editar foto ");
+    }
+
     public void traerUsuario(){
         final ProgressDialog mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage("Cargando...");
@@ -449,7 +487,7 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
                                 auxiliar=document.getId();
                                 user.set_userName((String) document.get("userName"));
                                 user.set_userLastName((String) document.get("userLastname"));
-
+                                user.set_userProfilePicture((String) document.get("userProfilePicture"));
                                 mProgressDialog.dismiss();
                                 irHome(null);
                                 if (configuracionActual==2){
@@ -907,11 +945,143 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
             TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
             TransaccionesDeFragment.commit();
         }
+        if (fragment==999){
+            perfil();
+            mostarNavBar();
+            ImageView flecha =findViewById(R.id.flecha);flecha.setVisibility(View.GONE);
+            txtBarra.setText("Mi Perfil");
+        }
     }
+
+    public void pickNewProfilePicture(View view){
+
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED)
+        {
+            Log.d("pickNewProfilePicture","No tiene permiso, deshabilito el boton de tomar fotos y pido permiso");
+            //Desactivar el boton
+            ActivityCompat.requestPermissions(this, new String[]
+                    {Manifest.permission.CAMERA,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE}, codigoPedirPermiso);
+        } else
+        {
+            Log.d("pickNewProfilePicture","Tiene permiso, habilito el boton de tomar fotos");
+            editarImagen=true;
+            elegirNuevaFoto();
+        }
+    }
+
+    public void onRequestPermissionsResult(int codigoRespuesta, @NonNull String[] nombresPermisos, @NonNull int[] resultadosPermisos) {
+        if (codigoRespuesta==codigoPedirPermiso){
+            Log.d("PermisosPedidos","Permisos obtenidos: "+nombresPermisos.length);
+            for(int i=0;i<nombresPermisos.length;i++){
+                Log.d("PermisosPedidos","Permisos: "+i+" - Nombre: "+nombresPermisos[i]+" - "+(resultadosPermisos[i]==PackageManager.PERMISSION_GRANTED));
+            }
+            Log.d("PermisosPedidos","Vamos a chequear los permisos pedidos");
+            Boolean obtuvoTodosLosPermisos=true;
+            for (int i=0;i<resultadosPermisos.length;i++){
+                if(resultadosPermisos[i]!=PackageManager.PERMISSION_GRANTED){
+                    obtuvoTodosLosPermisos=false;
+                }
+            }
+            if (obtuvoTodosLosPermisos){
+                Log.d("PermisosPedidos","Obtuvo los permisos");
+                elegirNuevaFoto();
+            }else{
+                Log.d("PermisosPedidos","No obtuvo los permisos");
+            }
+        }
+    }
+
+public void elegirNuevaFoto(){
+Intent intentObtenerFoto;
+intentObtenerFoto= new Intent(Intent.ACTION_GET_CONTENT);
+    intentObtenerFoto.setType("image/*");
+    Log.d("elegirFoto","Llamo a la activity");
+    startActivityForResult(Intent.createChooser(intentObtenerFoto,"Seleccione foto"),codigoLlamadaElegirFoto);
+}
+
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("FotoObtenida","Req:"+requestCode+" - Resul: "+resultCode);
+        if(requestCode==codigoLlamadaFoto&&resultCode==RESULT_OK){
+            Log.d("FotoObtenida","Foto tomada OK");
+            foto=(Bitmap)data.getExtras().get("data");
+            Log.d("FotoObtenida","Mando a procesar la imagen");
+            procesarFoto(foto);
+        }
+        if(requestCode==codigoLlamadaElegirFoto&&resultCode==RESULT_OK&&data!=null){
+            Uri ubicacion=data.getData();
+            Log.d("FotoObtenida","Ubicacion: "+ubicacion);
+            try {
+                foto= MediaStore.Images.Media.getBitmap(getContentResolver(),ubicacion);
+            }catch (Exception error){ Log.d("FotoObtenida","Error: "+error); }
+            if(foto!=null){
+                Log.d("FotoObtenida","Mando a procesar la imagen");
+                procesarFoto(foto);
+            }
+
+        }
+    }
+
+    public void procesarFoto(Bitmap foto){
+        bEditar=foto;
+        irEditarProfilePicture(null);
+    }
+public Bitmap traerImagenSeleccionada(){return bEditar;}
+
+    public Bitmap traerImagenDePerfil(){return imagenActual;}
 
 public ArrayList<itemCV> traerLista(){
         return itemCVList;
 }
+
+public boolean enviarSiSeCambio(){return editarImagen;}
+
+public void changeEstadoEdit(){editarImagen=false;}
+
+public void editarImagen(final Bitmap foto){
+    final ProgressDialog mProgressDialog = new ProgressDialog(this);
+    mProgressDialog.setMessage("Cargando...");
+    mProgressDialog.show();
+
+        Log.d("editarImagen","Vamo a editar");
+    // Create a storage reference from our app
+    StorageReference storageRef = storage.getReference();
+
+
+
+// Create a reference to 'images/mountains.jpg'
+    StorageReference profilePicture = storageRef.child("profilePictures/"+auxiliar+".jpg");
+
+// While the file names are the same, the references point to different files
+    profilePicture.getName().equals(profilePicture.getName());    // true
+    profilePicture.getPath().equals(profilePicture.getPath());    // false
+
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    foto.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+    byte[] data = baos.toByteArray();
+
+    UploadTask uploadTask = profilePicture.putBytes(data);
+    uploadTask.addOnFailureListener(new OnFailureListener() {
+        @Override
+        public void onFailure(@NonNull Exception exception) {
+            Log.d("editarImagen","Salio mal");
+            // Handle unsuccessful uploads
+        }
+    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        @Override
+        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+            Log.d("editarImagen","Perfecto");
+            imagenActual=foto;
+            perfil();
+            mostarNavBar();
+            ImageView flecha =findViewById(R.id.flecha);flecha.setVisibility(View.GONE);
+
+            mProgressDialog.dismiss();
+        }
+    });
+}
+
 
 public void editarItemIntelectual(itemCV item){
     DocumentReference dato = db.collection("itemCV").document(item.get_documentPath());

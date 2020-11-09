@@ -1,8 +1,12 @@
 package com.example.newpos;
 
 import android.app.Fragment;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,10 +25,18 @@ import androidx.constraintlayout.widget.ConstraintSet;
 
 import com.google.api.Distribution;
 
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.BitSet;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class fragVerPerfilCv extends Fragment  {
     int i;
+    CircleImageView profileImage;
     LinearLayout layoutEducation;
     LinearLayout layoutExperiencia;
     LinearLayout layoutSkills;
@@ -34,6 +46,9 @@ public class fragVerPerfilCv extends Fragment  {
     ArrayList<itemCV> arrayListSkills;
     ArrayList<itemCV> arrayListIdioma;
     ImageView flecha;
+    Bitmap bp;
+    MainActivity actPrincipal;
+
     //onCreateView
 
     // "Atar" el fragment al layout correspondiente
@@ -41,7 +56,6 @@ public class fragVerPerfilCv extends Fragment  {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflador, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        MainActivity actPrincipal;
         actPrincipal=(MainActivity) getActivity();
         i=actPrincipal.obtenerConfigActual();
         View VistaADevolver=null;
@@ -57,6 +71,17 @@ public class fragVerPerfilCv extends Fragment  {
             TextView txtName=VistaADevolver.findViewById(R.id.textViewNombre);
             String nombre= usuario.get_userName()+" "+usuario.get_userLastName();
             txtName.setText(nombre);
+            profileImage= VistaADevolver.findViewById(R.id.profile_image);
+
+            Bitmap foto = actPrincipal.traerImagenDePerfil();
+            if (foto == null) {
+                descargarFoto miTarea=new descargarFoto();
+                miTarea.execute(usuario.get_userProfilePicture());
+            } else {
+                profileImage.setImageBitmap(foto);
+            }
+
+
 
             arrayListEducacion=actPrincipal.obtenerListaEducacion();
             arrayListExperiencia=actPrincipal.obtenerListaExperiencia();
@@ -154,5 +179,41 @@ public class fragVerPerfilCv extends Fragment  {
         }
         return VistaADevolver;
     }
+
+    class descargarFoto extends AsyncTask<String, Void, Bitmap>{
+        @Override
+        protected Bitmap doInBackground(String... Ruta) {
+            Bitmap imagenConvertida=null;
+            try {
+                URL miRuta= new URL(Ruta[0]);
+                HttpURLConnection conexionURL=(HttpURLConnection) miRuta.openConnection();
+                if (conexionURL.getResponseCode()==200){
+                    Log.d("Descarga","Perfecto ");
+                    InputStream cuerpoDatos=conexionURL.getInputStream();
+                    BufferedInputStream lectorEntrada=new BufferedInputStream(cuerpoDatos);
+                    imagenConvertida= BitmapFactory.decodeStream(lectorEntrada);
+                    conexionURL.disconnect();
+                }
+            }catch (Exception error){
+                Log.d("Descarga","Error: "+error);
+            }
+            return imagenConvertida;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            if (bitmap!=null){
+                profileImage.setImageBitmap(bitmap);
+                bp=bitmap;
+
+                enviar();
+            }else {
+                profileImage.setImageResource(R.drawable.profilepicture);
+            }
+        }
+    }
+public void enviar(){
+    actPrincipal.recibirProfile(bp);
+}
 }
 

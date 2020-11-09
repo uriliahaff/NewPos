@@ -25,7 +25,8 @@
             android:layout_marginTop="15dp"
             android:layout_gravity="center"
             android:layout_height="150dp"
-            android:src="@drawable/profile"
+            android:onClick="irEditarProfilePicture"
+            android:src="@drawable/profilepicture"
             app:civ_border_color="#FF000000"
             app:civ_border_width="0dp" />
 

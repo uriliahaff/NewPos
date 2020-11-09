@@ -65,7 +65,9 @@
     <string name="PostulationRechazada2">ha sido rechazada.</string>
     <string name="SorryPostulaciones">No tiene postulaciones aceptadas por el momento.</string>
     <string name="SignOut">Sign Out</string>
-
+    <string name="UploadPicture">Subir imagen</string>
+    <string name="EditProfilePicture">Editar foto de perfil</string>
+    <string name="ChoseNewProfilePicture">Elegir nueva foto</string>
 
     <string name="text1">What do you want, Login or Register?
         If you want to Start Session, press above.
