@@ -623,6 +623,10 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
         TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
         TransaccionesDeFragment.commit();
         fragment=22;
+        if (configuracionActual!=1){
+            ImageView flecha =findViewById(R.id.flecha);flecha.setVisibility(View.VISIBLE);
+            txtBarra.setText("Editar Perfil");
+        }
     }
 
     //Ver CV
@@ -912,43 +916,47 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
         fragment=24;
     }
 
-    public void back(View view){
-        Log.d("fragment",fragment+"");
-        if (fragment==24){
+    public void back(View view) {
+        Log.d("fragment", fragment + "");
+        if (fragment == 24) {
             perfil();
-            ImageView flecha =findViewById(R.id.flecha);flecha.setVisibility(View.GONE);
-            String sTexto=getString(R.string.My_Profile);
+            ImageView flecha = findViewById(R.id.flecha);
+            flecha.setVisibility(View.GONE);
+            String sTexto = getString(R.string.My_Profile);
             txtBarra.setText(sTexto);
         }
-        if (fragment==30||fragment==301||fragment==302){
+        if (fragment == 30 || fragment == 301 || fragment == 302) {
             editarCV(null);
             mostarNavBar();
         }
-        if (fragment==777){
-            ImageView flecha =findViewById(R.id.flecha);flecha.setVisibility(View.GONE);
-            fragTrabajos miFragDeIngreso=new fragTrabajos();
-            TransaccionesDeFragment=AdminFragments.beginTransaction();
+        if (fragment == 777) {
+            ImageView flecha = findViewById(R.id.flecha);
+            flecha.setVisibility(View.GONE);
+            fragTrabajos miFragDeIngreso = new fragTrabajos();
+            TransaccionesDeFragment = AdminFragments.beginTransaction();
             TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
             TransaccionesDeFragment.commit();
         }
-        if (fragment==888){
-            ImageView flecha =findViewById(R.id.flecha);flecha.setVisibility(View.GONE);
-            fragPostulacionesPendientesAceptadas miFragDeIngreso=new fragPostulacionesPendientesAceptadas();
-            TransaccionesDeFragment=AdminFragments.beginTransaction();
+        if (fragment == 888) {
+            ImageView flecha = findViewById(R.id.flecha);
+            flecha.setVisibility(View.GONE);
+            fragPostulacionesPendientesAceptadas miFragDeIngreso = new fragPostulacionesPendientesAceptadas();
+            TransaccionesDeFragment = AdminFragments.beginTransaction();
             TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
             TransaccionesDeFragment.commit();
         }
-        if (fragment==37){
-            fragment=777;
-            fragTrabajoSeleccionado miFragDeIngreso=new fragTrabajoSeleccionado();
-            TransaccionesDeFragment=AdminFragments.beginTransaction();
+        if (fragment == 37) {
+            fragment = 777;
+            fragTrabajoSeleccionado miFragDeIngreso = new fragTrabajoSeleccionado();
+            TransaccionesDeFragment = AdminFragments.beginTransaction();
             TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
             TransaccionesDeFragment.commit();
         }
-        if (fragment==999){
+        if (fragment == 999 || fragment==22) {
             perfil();
             mostarNavBar();
-            ImageView flecha =findViewById(R.id.flecha);flecha.setVisibility(View.GONE);
+            ImageView flecha = findViewById(R.id.flecha);
+            flecha.setVisibility(View.GONE);
             txtBarra.setText("Mi Perfil");
         }
     }
