@@ -77,7 +77,7 @@ itemCV itemEditar;
             actPrincipal.editarItemIntelectual(unItem);
             }
         });
-        Button btnCancel=VistaADevolver.findViewById(R.id.bCancel);
+        Button btnCancel = VistaADevolver.findViewById(R.id.bCancel);
         btnCancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 actPrincipal.cancelar();

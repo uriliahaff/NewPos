@@ -58,44 +58,45 @@ public class fragPopUp extends Fragment  {
         }
         if(num==7){
             sTitulo=getString(R.string.Sign_Up);
-            sTexto=getString(R.string.text7);
+            sTexto=getString(R.string.text15);
         }
         if(num==8){
             sTitulo=getString(R.string.Sign_Up);
-            sTexto=getString(R.string.text8);
+            sTexto=getString(R.string.text16);
         }
         if(num==9){
             sTitulo=getString(R.string.Sign_Up);
-            sTexto=getString(R.string.text9);
+            sTexto=getString(R.string.text7);
         }
         if(num==10){
             sTitulo=getString(R.string.Sign_Up);
-            sTexto=getString(R.string.text10);
+            sTexto=getString(R.string.text8);
         }
         if(num==11){
             sTitulo=getString(R.string.Sign_Up);
-            sTexto=getString(R.string.text11);
+            sTexto=getString(R.string.text9);
         }
         if(num==12){
             sTitulo=getString(R.string.Sign_Up);
-            sTexto=getString(R.string.text12);
+            sTexto=getString(R.string.text10);
         }
         if(num==13){
             sTitulo=getString(R.string.Sign_Up);
-            sTexto=getString(R.string.text13);
+            sTexto=getString(R.string.text11);
         }
         if(num==14){
             sTitulo=getString(R.string.Sign_Up);
-            sTexto=getString(R.string.text14);
+            sTexto=getString(R.string.text12);
         }
         if(num==15){
             sTitulo=getString(R.string.Sign_Up);
-            sTexto=getString(R.string.text15);
+            sTexto=getString(R.string.text13);
         }
         if(num==16){
             sTitulo=getString(R.string.Sign_Up);
-            sTexto=getString(R.string.text16);
+            sTexto=getString(R.string.text14);
         }
+
         if(num==17){
             sTitulo=getString(R.string.Sign_Up);
             sTexto=getString(R.string.text17);

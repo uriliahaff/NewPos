@@ -8,6 +8,7 @@
     <color name="white">#fff</color>
     <color name="celeste">#6e9eff</color>
     <color name="grey">#D3D3D3</color>
+    <color name="darkgrey">#BFBFBF</color>
     <color name="darkGrey">#4A4A4A</color>
     <color name="colorIncorrecto">#fe0000</color>
 </resources>

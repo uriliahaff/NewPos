@@ -262,6 +262,7 @@
         android:text="@string/Sign_Up"
         android:textColor="@color/celeste"
         android:textSize="24sp"
+        android:onClick="register1"
         app:layout_constraintBottom_toBottomOf="@+id/bottomButtonNew"
         app:layout_constraintLeft_toLeftOf="@+id/large3_guideline"
         app:layout_constraintRight_toRightOf="@+id/large4_guideline"

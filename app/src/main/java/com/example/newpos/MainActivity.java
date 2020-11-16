@@ -69,7 +69,7 @@ import nl.dionsegijn.konfetti.models.Size;
 public class MainActivity extends AppCompatActivity {
    //Declaro variables
     itemCV item,itemOther,itemEditar;
-    User user;
+    User user,usuarioRegistro;
     String tituloEditar,subtituloEditar,primeraFechaEditar,segundaFechaEditar,habilidadEditar;
     ArrayList<itemCV> itemCVList;
     ArrayList<postulation> itemPostulations;
@@ -487,6 +487,15 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
                                 auxiliar=document.getId();
                                 user.set_userName((String) document.get("userName"));
                                 user.set_userLastName((String) document.get("userLastname"));
+                                user.set_userBirthDate((String) document.get("userDate"));
+                                user.set_userNationality((String) document.get("userNationality"));
+                                user.set_userResidenceCountry((String) document.get("userResidence"));
+                                user.set_userProvince((String) document.get("userProvince"));
+                                user.set_userAdrees((String) document.get("userAdress"));
+                                user.set_userPhoneNumber((String) document.get("userCelular"));
+                                user.set_userTelephoneNumber((String) document.get("userTelefono"));
+                                user.set_userPhoneNumber((String) document.get("userCelular"));
+                                user.set_userDescription((String) document.get("userDescription"));
                                 user.set_userProfilePicture((String) document.get("userProfilePicture"));
                                 mProgressDialog.dismiss();
                                 irHome(null);
@@ -510,6 +519,31 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
         return user;
     }
 
+    public void enviarUsuarioEditar(final User usuarioEditado){
+        final ProgressDialog mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setMessage("Cargando...");
+        mProgressDialog.show();
+        DocumentReference dato = db.collection("user").document(auxiliar);
+        // Set the "isCapital" field of the city 'DC'
+        dato
+                .update("userName", usuarioEditado.get_userName(),"userLastname", usuarioEditado.get_userLastName(),"userDate", usuarioEditado.get_userBirthDate(),"userDate", usuarioEditado.get_userBirthDate(),"userNationality", usuarioEditado.get_userNationality(),"userResidence", usuarioEditado.get_userResidenceCountry(),"userProvince", usuarioEditado.get_userProvince(),"userAdress", usuarioEditado.get_userAdrees(),"userCelular", usuarioEditado.get_userPhoneNumber(),"userTelefono", usuarioEditado.get_userTelephoneNumber(),"userDescription", usuarioEditado.get_userDescription())
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("saveUno", "DocumentSnapshot successfully updated!");
+                        mProgressDialog.dismiss();
+                        user=usuarioEditado;
+                        verPerfil(null);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("saveUno", "Error actualizando el documento", e);
+                    }
+                });
+    }
+
     //Cargo el fragment de registro
     public void register1(View view){
         Log.d("Fragment","Llegue");
@@ -520,29 +554,16 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
         fragment=4;
     }
 
+    public void omitirIngreso(){
+        home();
+        mostarNavBar();
+        bottomNav.setOnNavigationItemSelectedListener(navListener);
+        bottomNav.setSelectedItemId(R.id.nav_home);
+    }
+
     //Cuando se clickea el continuar en el registro
     public void loginContinue(View view){
-        //Si llego al final
-       if(fragment==19){
-           home();
-       }
-        //Normalmente
-        else if(fragment!=16){
-            Log.d("Fragment","Llegue");
-            fragRegister1 miFragDeIngreso=new fragRegister1();
-            TransaccionesDeFragment=AdminFragments.beginTransaction();
-            TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
-            TransaccionesDeFragment.commit();
-            fragment++;
-        }
-        //Fragment de si tiene o no registro
-        else {
-            fragRegister2 miFragDeIngreso=new fragRegister2();
-            TransaccionesDeFragment=AdminFragments.beginTransaction();
-            TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
-            TransaccionesDeFragment.commit();
-            fragment=17;
-        }
+
     }
 
     //Si tiene registro
@@ -570,6 +591,14 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
     {
         home();
         fragment=20;
+    }
+
+    public void registro2(){
+        fragRegister2 miFragDeIngreso=new fragRegister2();
+        TransaccionesDeFragment=AdminFragments.beginTransaction();
+        TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
+        TransaccionesDeFragment.commit();
+        fragment=17;
     }
 
     //Ir a home
@@ -1504,6 +1533,10 @@ if(fragment==292){fragment=312;}
         }
     }
 
+    public void continuarRegistro(){
+        fragment++;
+    }
+
     //Continuar con el ingreso de un item nuevo al CV
     public void addItemContinue(){
         if(fragment==30||fragment==301||fragment==302){
@@ -1788,6 +1821,10 @@ if(fragment==292){fragment=312;}
     public void LogOut (View view)
     {
         Log.d("logOut","Vamo a cerrar sesion");
+        user=new User();
+        auxiliar="";
+        foto=null;
+        imagenActual=null;
         mAuth.signOut();
         bottomNav.setVisibility(View.GONE);
         barra.setVisibility(View.GONE);
