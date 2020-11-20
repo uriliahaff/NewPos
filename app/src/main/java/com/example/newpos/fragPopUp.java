@@ -80,10 +80,6 @@ public class fragPopUp extends Fragment  {
             sTitulo=getString(R.string.Sign_Up);
             sTexto=getString(R.string.text10);
         }
-        if(num==13){
-            sTitulo=getString(R.string.Sign_Up);
-            sTexto=getString(R.string.text11);
-        }
         if(num==14){
             sTitulo=getString(R.string.Sign_Up);
             sTexto=getString(R.string.text12);

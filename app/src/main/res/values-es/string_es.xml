@@ -85,8 +85,8 @@
     <string name="text8">Ingrese nacionalidad. Para continuar pulse abajo. Para volver pulse arriba.</string>
     <string name="text9">Ingrese país de residencia. Para continuar pulse abajo. Para volver pulse arriba.</string>
     <string name="text10">Ingrese su estado/provincia. Para continuar pulse abajo. Para volver pulse arriba.</string>
-    <string name="text11">Ingrese su calle. Para continuar pulse abajo. Para volver pulse arriba.</string>
-    <string name="text12">Ingrese su numero de calle. Para continuar pulse abajo. Para volver pulse arriba.</string>
+    <string name="text11">Ingrese su direccion. Para continuar pulse abajo. Para volver pulse arriba.</string>
+    <string name="text12">Ingrese su direccion. Para continuar pulse abajo. Para volver pulse arriba.</string>
     <string name="text13">Ingrese numero de celular. Para continuar pulse abajo. Para volver pulse arriba.</string>
     <string name="text14">Ingrese numero de telefono. Para continuar pulse abajo. Para volver pulse arriba.</string>
     <string name="text15">Ingrese contraseña. Para continuar pulse abajo. Para volver pulse arriba.</string>

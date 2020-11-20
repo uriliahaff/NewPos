@@ -12,13 +12,18 @@ import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 
+import com.hbb20.CCPCountry;
+import com.hbb20.CountryCodePicker;
+
 public class fragRegister1 extends Fragment  {
 int j; int w;
 User usuarioRegistro;
     EditText edt;
+    ImageView icon,iconsi,iconno,iconSubir;
+    CountryCodePicker ccp;
     String password1,password2;
     //onCreateView
-Button btn;
+Button btn,btnSi,btnNo, btnSubir;
     // "Atar" el fragment al layout correspondiente
     @Nullable
     @Override
@@ -49,71 +54,185 @@ Button btn;
                 btn.setVisibility(View.GONE);
             }
         }
-    Button btnContinue=VistaADevolver.findViewById(R.id.bLogIn);
+        final Button btnContinue=VistaADevolver.findViewById(R.id.bLogIn);
         Button btnOmitir=VistaADevolver.findViewById(R.id.bLog);
+        btnSi=VistaADevolver.findViewById(R.id.bLogSi);
+        btnNo=VistaADevolver.findViewById(R.id.bLogNo);
+        btnSubir=VistaADevolver.findViewById(R.id.bSubirArchivo);
+        iconSubir=VistaADevolver.findViewById(R.id.iconSubir);
+        icon=VistaADevolver.findViewById(R.id.icon);
+        iconsi=VistaADevolver.findViewById(R.id.iconSi);
+        iconno=VistaADevolver.findViewById(R.id.iconNo);
+
         final View finalVistaADevolver = VistaADevolver;
         btnContinue.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
-                if(w==19){
-                    actPrincipal.home();
-                    actPrincipal.mostarNavBar();
+                if(w==20){
+                    actPrincipal.irRegistro(usuarioRegistro);
                 }
-                //Normalmente
-                else if(w!=16){
-                    Log.d("Fragment","Llegue");
-                    w++;
-                     edt = finalVistaADevolver.findViewById(R.id.editText);
-                }
-                //Fragment de si tiene o no registro
                 else {
-                actPrincipal.registro2();
-                }
-                if(w==4){
-                    usuarioRegistro.set_userName(edt.getText().toString());
-                    actPrincipal.continuarRegistro();
-                }
+
+                w++;
+                edt = finalVistaADevolver.findViewById(R.id.editText);
+                ccp = finalVistaADevolver.findViewById(R.id.ccp);
+
                 if(w==5){
-                    usuarioRegistro.set_userLastName(edt.getText().toString());
-                    actPrincipal.continuarRegistro();
+                    usuarioRegistro.set_userName(edt.getText().toString());
+                    edt.setText("");
                 }
                 if(w==6){
-                    usuarioRegistro.set_userEmail(edt.getText().toString());
-                    actPrincipal.continuarRegistro();
+                    usuarioRegistro.set_userLastName(edt.getText().toString());
+                    edt.setText("");
                 }
                 if(w==7){
-                    password1= edt.getText().toString();
-                    actPrincipal.continuarRegistro();
+                    usuarioRegistro.set_userEmail(edt.getText().toString());
+                    edt.setText("");
                 }
                 if(w==8){
-                    password2= edt.getText().toString();
-                    if(password1==password2){
-                        usuarioRegistro.set_userPassword(edt.getText().toString());
-                        actPrincipal.continuarRegistro();
-                    }
+                    password1= edt.getText().toString();
+                    edt.setText("");
                 }
                 if(w==9){
-                    usuarioRegistro.set_userName(edt.getText().toString());
-                    actPrincipal.continuarRegistro();
+                    password2= edt.getText().toString();
+                    if(password1.equals(password2)){
+                        usuarioRegistro.set_userPassword(edt.getText().toString());
+                        edt.setText("");
+                    }
+                    else {actPrincipal.atras();}
                 }
                 if(w==10){
-                    usuarioRegistro.set_userName(edt.getText().toString());
-                    actPrincipal.continuarRegistro();
+                    usuarioRegistro.set_userBirthDate(edt.getText().toString());
+                    edt.setText("");
+                    edt.setVisibility(View.GONE);
+                    ccp.setVisibility(View.VISIBLE);
                 }
-                actPrincipal.mostrarPopUp();
+                if(w==11){
+                    usuarioRegistro.set_userNationality(ccp.getDefaultCountryNameCode());
+                }
+                if(w==12){
+                    usuarioRegistro.set_userResidenceCountry(ccp.getDefaultCountryNameCode());
+                    edt.setVisibility(View.VISIBLE);
+                    ccp.setVisibility(View.GONE);
+                }
+                if(w==13){
+                    usuarioRegistro.set_userProvince(edt.getText().toString());
+                    edt.setText("");
+                    actPrincipal.continuarRegistro();
+                    w++;
+                }
+                if(w==15){
+                    usuarioRegistro.set_userAdrees(edt.getText().toString());
+                    edt.setText("");
+                }
+                if(w==16){
+                    usuarioRegistro.set_userPhoneNumber(edt.getText().toString());
+                    edt.setText("");
+                }
+                if(w==17){
+                    usuarioRegistro.set_userTelephoneNumber(edt.getText().toString());
+                    edt.setText("");
+                    btnSi.setVisibility(View.VISIBLE);
+                    btnNo.setVisibility(View.VISIBLE);
+                    btnContinue.setVisibility(View.GONE);
+                    icon.setVisibility(View.GONE);
+                    iconsi.setVisibility(View.VISIBLE);
+                    iconno.setVisibility(View.VISIBLE);
+                    edt.setVisibility(View.GONE);
+                }
+
+                    if(w==18){
+                        btnSi.setVisibility(View.GONE);
+                        btnNo.setVisibility(View.GONE);
+                        btnContinue.setVisibility(View.VISIBLE);
+                        icon.setVisibility(View.VISIBLE);
+                        iconsi.setVisibility(View.GONE);
+                        btnSubir.setVisibility(View.GONE);
+                        iconSubir.setVisibility(View.GONE);
+                        iconno.setVisibility(View.GONE);
+                        edt.setVisibility(View.VISIBLE);
+
+                    }
+
+                if(w==19){
+                    usuarioRegistro.set_userDescription(edt.getText().toString());
+                    actPrincipal.irRegistro(usuarioRegistro);
+                    edt.setText("");
+                }
                 if (w>=9){
                     Button btn= finalVistaADevolver.findViewById(R.id.bLog);
                     btn.setVisibility(View.VISIBLE);
                 }
+                    actPrincipal.mostrarPopUp();
+                    actPrincipal.continuarRegistro();
             }
 
+            }
         });
 
         btnOmitir.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                actPrincipal.omitirIngreso();
+                actPrincipal.irRegistro(usuarioRegistro);
             }
         });
+
+        btnSi.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+            Log.d("registro","Si");
+                btnSi.setVisibility(View.GONE);
+                btnNo.setVisibility(View.GONE);
+                btnContinue.setVisibility(View.VISIBLE);
+                icon.setVisibility(View.VISIBLE);
+                iconsi.setVisibility(View.GONE);
+                iconno.setVisibility(View.GONE);
+                edt.setVisibility(View.GONE);
+            btnSubir.setVisibility(View.VISIBLE);
+            iconSubir.setVisibility(View.VISIBLE);
+                actPrincipal.mostrarPopUp();
+                actPrincipal.continuarRegistro();
+                w=17;
+            }
+        });
+
+        btnSubir.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+
+            }
+        });
+
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Log.d("registro","No");
+                btnSi.setVisibility(View.GONE);
+                btnNo.setVisibility(View.GONE);
+                btnContinue.setVisibility(View.VISIBLE);
+                icon.setVisibility(View.VISIBLE);
+                iconsi.setVisibility(View.GONE);
+                iconno.setVisibility(View.GONE);
+                edt.setVisibility(View.VISIBLE);
+                actPrincipal.continuarRegistro();
+                actPrincipal.mostrarPopUp();
+                btnContinue.setText("Registrarse");
+w=19;
+
+                if(w==19){
+                    usuarioRegistro.set_userDescription(edt.getText().toString());
+                    edt.setText("");
+                }
+                if(w==20){
+                    actPrincipal.home();
+                    actPrincipal.mostarNavBar();
+                }
+                if (w>=9){
+                    Button btn= finalVistaADevolver.findViewById(R.id.bLog);
+                    btn.setVisibility(View.VISIBLE);
+                }
+                w++;
+                actPrincipal.mostrarPopUp();
+                actPrincipal.continuarRegistro();
+            }
+        });
+
 
         return VistaADevolver;
     }

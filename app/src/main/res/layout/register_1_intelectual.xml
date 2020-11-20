@@ -33,6 +33,21 @@
     <androidx.constraintlayout.widget.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/topBoton1"
+        app:layout_constraintGuide_percent=".63"
+        android:orientation="horizontal"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/topBoton3"
+        app:layout_constraintGuide_percent=".73"
+        android:orientation="horizontal"/>
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/topBoton"
         app:layout_constraintGuide_percent=".75"
         android:orientation="horizontal"/>
@@ -122,6 +137,14 @@
         app:layout_constraintGuide_percent="0.38"
         android:orientation="horizontal"/>
 
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/topSubir"
+        app:layout_constraintGuide_percent="0.4"
+        android:orientation="horizontal"/>
+
+
 
     <FrameLayout
         android:layout_width="0dp"
@@ -149,6 +172,40 @@
         android:padding="5dip"
         android:inputType="text" />
 
+    <com.hbb20.CountryCodePicker
+        android:id="@+id/ccp"
+        android:layout_width="0dp"
+        android:background="@drawable/et_style"
+        android:elevation="10dp"
+        android:visibility="gone"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/ancho4_guideline"
+        app:layout_constraintLeft_toLeftOf="@+id/large3_guideline"
+        app:layout_constraintRight_toRightOf="@+id/large4_guideline"
+        app:layout_constraintTop_toTopOf="@id/ancho3_guideline"
+        app:ccpDialog_searchEditTextTint="@color/black"
+        app:ccp_showPhoneCode="false"
+        app:ccp_textGravity="LEFT"
+        app:ccp_showFullName="true"
+        app:ccp_showNameCode="true"/>
+
+    <Button
+        android:id="@+id/bLogNo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/boton_incorrecto"
+        android:drawableTint="@color/white"
+        android:text="@string/No"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/topBoton3"
+        app:layout_constraintLeft_toLeftOf="@+id/large3_guideline"
+        app:layout_constraintRight_toRightOf="@+id/large4_guideline"
+        app:layout_constraintTop_toTopOf="@+id/topBoton1" />
+
+
+
     <Button
         android:id="@+id/bLogIn"
         android:layout_width="0dp"
@@ -158,11 +215,59 @@
         android:text="@string/Continue"
         android:textColor="@color/white"
         android:textSize="24sp"
-        android:onClick="loginContinue"
         app:layout_constraintBottom_toTopOf="@+id/bottomBoton"
         app:layout_constraintLeft_toLeftOf="@+id/large3_guideline"
         app:layout_constraintRight_toRightOf="@+id/large4_guideline"
         app:layout_constraintTop_toTopOf="@+id/topBoton" />
+
+    <Button
+        android:id="@+id/bLogSi"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/botton_correcto"
+        android:drawableTint="@color/white"
+        android:text="@string/Yes"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        android:textSize="24sp"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomBoton"
+        app:layout_constraintLeft_toLeftOf="@+id/large3_guideline"
+        app:layout_constraintRight_toRightOf="@+id/large4_guideline"
+        app:layout_constraintTop_toTopOf="@+id/topBoton" />
+
+
+    <Button
+        android:id="@+id/bSubirArchivo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/boton_subir"
+        android:drawableTint="@color/white"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/topBoton3"
+        app:layout_constraintLeft_toLeftOf="@+id/large1_guideline"
+        app:layout_constraintRight_toRightOf="@+id/large2_guideline"
+        app:layout_constraintTop_toTopOf="@+id/topSubir" />
+
+    <ImageView
+        android:id="@+id/iconSubir"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:elevation="10dp"
+        android:tint="@color/white"
+        android:paddingLeft="20dp"
+        android:paddingTop="20dp"
+        android:paddingRight="20dp"
+        android:visibility="gone"
+        android:paddingBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/topBoton3"
+        app:layout_constraintLeft_toLeftOf="@+id/large1_guideline"
+        app:layout_constraintRight_toRightOf="@+id/large2_guideline"
+        app:layout_constraintTop_toTopOf="@+id/topSubir"
+        app:srcCompat="@drawable/ic_file_upload_black_24dp" />
+
 
     <Button
         android:id="@+id/bLog"
@@ -179,7 +284,7 @@
         app:layout_constraintTop_toTopOf="@+id/topBoton2" />
 
     <ImageView
-        android:id="@+id/iconIniciar"
+        android:id="@+id/icon"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:elevation="10dp"
@@ -190,6 +295,35 @@
         app:layout_constraintRight_toRightOf="@+id/rightIcoon"
         app:layout_constraintTop_toTopOf="@+id/topBoton"
         app:srcCompat="@drawable/ic_subdirectory_arrow_right_black_24dp" />
+
+    <ImageView
+        android:id="@+id/iconSi"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:elevation="10dp"
+        android:tint="@color/white"
+        android:visibility="gone"
+        android:paddingLeft="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomBoton"
+        app:layout_constraintLeft_toLeftOf="@+id/large3_guideline"
+        app:layout_constraintRight_toRightOf="@+id/rightIcoon"
+        app:layout_constraintTop_toTopOf="@+id/topBoton"
+        app:srcCompat="@drawable/ic_done_black_24dp" />
+
+    <ImageView
+        android:id="@+id/iconNo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:tint="@color/white"
+        android:paddingLeft="20dp"
+        android:elevation="10dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/topBoton3"
+        app:layout_constraintLeft_toLeftOf="@+id/large3_guideline"
+        app:layout_constraintRight_toRightOf="@+id/rightIcoon"
+        app:layout_constraintTop_toTopOf="@+id/topBoton1"
+        app:srcCompat="@drawable/ic_cancel_black_24dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

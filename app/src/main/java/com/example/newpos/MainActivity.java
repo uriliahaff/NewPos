@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
     int codigoPedirPermiso;
     boolean editarImagen=false;
     User usuario;
+    FirebaseUser userFB;
     String auxiliar;
     int iEditItem;
     Bitmap bEditar;
@@ -565,6 +566,90 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
     public void loginContinue(View view){
 
     }
+
+    public void irRegistro(final User usuarioObtenido){
+        final ProgressDialog mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setMessage("Cargando...");
+        mProgressDialog.show();
+
+
+        mAuth.createUserWithEmailAndPassword(usuarioObtenido.get_userEmail(), usuarioObtenido.get_userPassword())
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("irRegistro", "createUserWithEmail:success");
+                            userFB = mAuth.getCurrentUser();
+
+                            Map<String, Object> data = new HashMap<>();
+                            data.put(("id"),userFB.getUid());
+                            data.put(("userAdress"),usuarioObtenido.get_userAdrees());
+                            data.put(("userCelular"),usuarioObtenido.get_userPhoneNumber());
+                            data.put(("userDescription"),usuarioObtenido.get_userDescription());
+                            data.put(("userLastname"),usuarioObtenido.get_userLastName());
+                            data.put(("userName"),usuarioObtenido.get_userName());
+                            data.put(("userNationality"),usuarioObtenido.get_userNationality());
+                            data.put(("userProvince"),usuarioObtenido.get_userProvince());
+                            data.put(("userResidence"),usuarioObtenido.get_userResidenceCountry());
+                            data.put(("userTelefono"),usuarioObtenido.get_userTelephoneNumber());
+                            data.put(("userProfilePicture"),"");
+
+
+                            db.collection("user")
+                                    .add(data)
+                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference) {
+                                            Log.e("crearUsuario", "Perfecto");
+
+                                            Map<String, Object> data2 = new HashMap<>();
+                                            data2.put(("id"),documentReference.getId());
+
+                                            db.collection("itemCV")
+                                                    .add(data2)
+                                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                        @Override
+                                                        public void onSuccess(DocumentReference documentReference) {
+                                                            Log.e("crearItemUsuario", "Perfecto");
+                                                            traerUsuario();
+                                                            mProgressDialog.dismiss();
+
+                                                        }
+                                                    })
+                                                    .addOnFailureListener(new OnFailureListener() {
+                                                        @Override
+                                                        public void onFailure(@NonNull Exception e) {
+                                                            Log.e("crearItemUsuario", "Error al añadir el item", e);
+                                                            Toast.makeText(getApplicationContext(), "Ocurrio un error y no se pudo agregar el item", Toast.LENGTH_SHORT).show();
+                                                            mProgressDialog.dismiss();
+                                                        }
+                                                    });
+
+
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.e("crearUsuario", "Error al añadir el item", e);
+                                            Toast.makeText(getApplicationContext(), "Ocurrio un error y no se pudo agregar el item", Toast.LENGTH_SHORT).show();
+                                            mProgressDialog.dismiss();
+                                        }
+                                    });
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("irRegistro", "createUserWithEmail:failure", task.getException());
+
+                        }
+
+                        // ...
+                    }
+                });
+
+
+    }
+
 
     //Si tiene registro
     public void tieneRegistro(View view)
@@ -1535,7 +1620,10 @@ if(fragment==292){fragment=312;}
 
     public void continuarRegistro(){
         fragment++;
+    }     public void atras(){
+        fragment--;
     }
+
 
     //Continuar con el ingreso de un item nuevo al CV
     public void addItemContinue(){
