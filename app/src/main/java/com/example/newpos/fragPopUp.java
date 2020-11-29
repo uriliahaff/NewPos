@@ -115,7 +115,19 @@ public class fragPopUp extends Fragment  {
         }
         if(num==22){
             sTitulo=getString(R.string.Profile);
-            sTexto=getString(R.string.text22);
+            texto.setTextSize(8);
+            User usuario=actPrincipal.enviarUsuario();
+            sTexto="Nombre: "+usuario.get_userName()+" Apellido: "+usuario.get_userLastName()+ " ";
+           if(usuario.get_userBirthDate().equals("")){ }else { sTexto+="Fecha de nacimiento: "+usuario.get_userBirthDate()+ " ";}
+            if(usuario.get_userNationality().equals("")){ }else { sTexto+="Nacionalidad: "+usuario.get_userNationality()+ " ";}
+            if(usuario.get_userResidenceCountry().equals("")){ }else { sTexto+="Pais de residencia: "+usuario.get_userResidenceCountry()+ " ";}
+            if(usuario.get_userProvince().equals("")){ }else { sTexto+="Estado/Provincia: "+usuario.get_userProvince()+ " ";}
+            if(usuario.get_userAdrees().equals("")){ }else { sTexto+="Direccion: "+usuario.get_userAdrees()+ " ";}
+            if(usuario.get_userPhoneNumber().equals("")){ }else { sTexto+="Celular: "+usuario.get_userPhoneNumber()+ " ";}
+            if(usuario.get_userTelephoneNumber().equals("")){ }else { sTexto+="Telefono: "+usuario.get_userTelephoneNumber()+ " ";}
+            if(usuario.get_userDescription().equals("")){ }else { sTexto+="Descripcion: "+usuario.get_userDescription() + " ";}
+
+            sTexto+=getString(R.string.text22);
         }
         if(num==23){
             sTitulo=getString(R.string.CV);
@@ -226,11 +238,13 @@ public class fragPopUp extends Fragment  {
         }
         if(num==35){
             sTitulo=getString(R.string.Jobs);
-            sTexto=getString(R.string.text32);
+            job empleoActual=actPrincipal.enviarEmpleoActual();
+            sTexto= "Empresa: "+ empleoActual.get_jobCompany()+" Empleo: "+ empleoActual.get_jobName()+" "+getString(R.string.text32);
         }
         if(num==36){
             sTitulo=getString(R.string.Jobs);
-            sTexto=getString(R.string.text33);
+            job empleoActual=actPrincipal.enviarEmpleoActual();
+            sTexto="Empresa: "+ empleoActual.get_jobCompany()+" Empleo: "+ empleoActual.get_jobName()+" Requisitos: "+ empleoActual.get_jobRequired()+" Ciudad: "+ empleoActual.get_jobCity()+" Dirección: "+ empleoActual.get_jobAdress()+" Día: "+ empleoActual.get_jobDays()+" Horario: "+ empleoActual.get_jobTime()+" "+getString(R.string.text33);
         }
         if(num==37){
             sTitulo=getString(R.string.Jobs);
@@ -240,17 +254,44 @@ public class fragPopUp extends Fragment  {
             sTitulo=getString(R.string.Applications);
             sTexto=getString(R.string.text35);
         }
+        if(num==391){
+            sTitulo=getString(R.string.Applications);
+            sTexto=getString(R.string.text371);
+        }
         if(num==39){
             sTitulo=getString(R.string.Applications);
-            sTexto=getString(R.string.text36);
+            postulation postulacionActual=actPrincipal.enviarPostulacionPendienteActual();
+
+            sTexto= "Empresa: "+postulacionActual.get_jobCompany()+" Empleo:"+postulacionActual.get_jobName()+" "+ getString(R.string.text36);
         }
         if(num==40){
             sTitulo=getString(R.string.Applications);
             sTexto=getString(R.string.text37);
         }
+        if(num==401){
+            sTitulo=getString(R.string.Applications);
+            postulation postulacionActual=actPrincipal.enviarPostulacionAceptadaActual();
+            sTexto= "Empresa: "+postulacionActual.get_jobCompany()+" Empleo:"+postulacionActual.get_jobName()+" "+ getString(R.string.text36);
+        }
         if(num==41){
             sTitulo=getString(R.string.More);
             sTexto=getString(R.string.text38);
+        }
+        if(num==50){
+            sTitulo=getString(R.string.Settings);
+            sTexto=getString(R.string.text50);
+        }
+        if(num==51){
+            sTitulo=getString(R.string.Settings);
+            sTexto=getString(R.string.text51);
+        }
+        if(num==52){
+            sTitulo=getString(R.string.Settings);
+            sTexto=getString(R.string.text52);
+        }
+        if(num==53){
+            sTitulo=getString(R.string.Settings);
+            sTexto=getString(R.string.text53);
         }
         titulo.setText(sTitulo);
         texto.setText(sTexto);

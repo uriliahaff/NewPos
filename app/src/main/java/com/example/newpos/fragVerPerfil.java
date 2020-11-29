@@ -29,8 +29,13 @@ User usuario;
 
         if (i == 1) {
         VistaADevolver=inflador.inflate(R.layout.ver_perfil, container, false);
-            actPrincipal.mostrarPopUp();
+        actPrincipal.mostrarPopUp();
+
+
+
         }
+
+
         if(i==2){
             VistaADevolver=inflador.inflate(R.layout.editar_usuario, container, false);
             final EditText name =VistaADevolver.findViewById(R.id.editName);
@@ -53,13 +58,6 @@ User usuario;
             celular.registerCarrierNumberEditText(eCelular);
             celular.setCountryForNameCode(usuario.get_userResidenceCountry());
 
-           /* ccpRecidence.setOnCountryChangeListener(new CountryCodePicker.OnCountryChangeListener() {
-                @Override
-                public void onCountrySelected() {
-                    String aux=ccpRecidence.getSelectedCountryNameCode();
-                    celular.setCountryForNameCode(aux);
-                }
-            });*/
             eCelular.setText(usuario.get_userPhoneNumber());
             final  EditText telefono =VistaADevolver.findViewById(R.id.editTelefono);
             telefono.setText(usuario.get_userTelephoneNumber());

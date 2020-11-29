@@ -48,13 +48,16 @@ ArrayList<postulation> listPostulations,list1,list2,list0;
             for (int i = 0; i < listPostulations.size(); i++) {
                 postulation unPostulation = listPostulations.get(i);
                 String aux = unPostulation.get_postulationStatus();
-                if (aux.equals("0")) {
-                    list0.add(unPostulation);
-                } else if (aux.equals("1")) {
-                    list1.add(unPostulation);
-                }
-                else if (aux.equals("2")) {
-                    list2.add(unPostulation);
+                if (aux == null) {
+
+                } else {
+                    if (aux.equals("0")) {
+                        list0.add(unPostulation);
+                    } else if (aux.equals("1")) {
+                        list1.add(unPostulation);
+                    } else if (aux.equals("2")) {
+                        list2.add(unPostulation);
+                    }
                 }
             }
             if (list0.size() == 0) {

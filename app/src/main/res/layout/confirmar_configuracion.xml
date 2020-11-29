@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/background_login"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
@@ -63,70 +63,63 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_percent="0.35" />
 
     <androidx.constraintlayout.widget.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ancho2_guideline"
-        app:layout_constraintGuide_percent="0.25"
+        app:layout_constraintGuide_percent="0.65"
         android:orientation="horizontal"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/ancho3_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.30" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/mitad"
-        app:layout_constraintGuide_percent="0.5"
-        android:orientation="vertical"/>
 
     <Button
         android:id="@+id/btn1"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:alpha="0.75"
-        android:background="@drawable/btn3"
-        android:text="@string/Back"
-        android:onClick="anteriorPostulacionPendiente"
+        android:background="@drawable/btn1"
+        android:text="Si"
         android:textColor="@color/black"
+        android:onClick="confirmo"
         android:textSize="45sp"
-        app:layout_constraintBottom_toBottomOf="@+id/bottom2_guideline"
+        app:layout_constraintBottom_toBottomOf="@+id/middle"
         app:layout_constraintLeft_toLeftOf="@+id/left_guideline"
-        app:layout_constraintRight_toRightOf="@+id/mitad"
-        app:layout_constraintTop_toTopOf="@+id/middle" />
+        app:layout_constraintRight_toRightOf="@+id/right_guideline"
+        app:layout_constraintTop_toTopOf="@+id/top_guideline" />
+
+
     <Button
         android:id="@+id/btn2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:alpha="0.75"
-        android:background="@drawable/btn4"
-        android:text="@string/Next"
-        android:onClick="siguientePostulacionPendiente"
+        android:background="@drawable/btn2"
+        android:onClick="irAccesibilidad"
+        android:text="No"
         android:textColor="@color/black"
         android:textSize="45sp"
         app:layout_constraintBottom_toBottomOf="@+id/bottom2_guideline"
-        app:layout_constraintLeft_toLeftOf="@+id/mitad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/left_guideline"
         app:layout_constraintRight_toRightOf="@+id/right_guideline"
-        app:layout_constraintTop_toTopOf="@+id/middle" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/middle"
+        app:layout_constraintVertical_bias="0.0" />
 
     <FrameLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:id="@+id/framePrueba"
-        app:layout_constraintBottom_toTopOf="@+id/ancho3_guideline"
+        app:layout_constraintBottom_toTopOf="@+id/ancho2_guideline"
         app:layout_constraintLeft_toLeftOf="@+id/large1_guideline"
         app:layout_constraintRight_toRightOf="@+id/large2_guideline"
-        android:background="@drawable/et_style"
-        android:onClick="irPostulaciones"
         app:layout_constraintTop_toTopOf="@id/ancho1_guideline"
+        android:background="@drawable/et_style"
+        android:onClick="irAccesibilidad"
         android:elevation="10dp">
     </FrameLayout>
+
 
 
 

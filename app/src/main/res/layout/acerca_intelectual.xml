@@ -205,10 +205,11 @@
                     android:layout_marginBottom="5dp"
                     android:layout_marginRight="10dp"
                     android:layout_height="1dp"/>
+
                 <LinearLayout
+                    android:id="@+id/layoutsettings"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="irHome"
                     android:orientation="horizontal">
 
                     <ImageView

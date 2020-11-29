@@ -96,7 +96,7 @@
     <string name="text19">Cuentanos acerca de tu discapacidad. Para finalizar, pulse abajo.  Para volver atras pulse arriba. </string>
     <string name="text20"> Para ir a "Mi perfil" pulse arriba a la izquierda. Para ir a "Trabajasos" pulse arriba a derecha. Para ir a "Postulaciones" pulse abajo a la izquierda. Para ir a "Más" pulse abajo a la derecha.</string>
     <string name="text21"> Para ver tu perfil pulse arriba de la pantalla. Para ver tu curriculum pulse abajo de la pantalla. Para ir al inicio pulse en el medio de la pantalla.</string>
-    <string name="text22"> Nombre. Para volver atras pulse abajo. </string>
+    <string name="text22"> Para volver atras pulse abajo. </string>
     <string name="text23">Para volver atras pulse abajo. Para editar el curriculum pulse arriba. </string>
     <string name="text24">Para editar educacion pulse arriba a la izquierda. Para editar experiencia laboral pulse arriba a la derecha. Para editar skills pulse abajo a la izquierda. Para editar idiomas pulse abajo la derecha. Im Paravolver atras pulse en el medio </string>
     <string name="text25">Para editar el item pulse arriba a la izquierda. Para ir al siguiente item pulse arriba a la derecha. Para ir al anterior item pulse abajo a la izquierda. Para añadir un item pulse abajo a la derecha. Para ir atras pulse en el medio. </string>
@@ -104,6 +104,7 @@
     <string name="text27">Para añadir pulse abajo.</string>
     <string name="text271">Ingrese del 1 al 10, el nivel de habilidad .Para añadir pulse abajo.</string>
     <string name="text272">Ingrese el nivel de habilidad .Para añadir pulse abajo.</string>
+    <string name="text371"> Lo sentimos. No tiene ninguna postulacion pendiente al momento. Para volver atras pulse abajo. </string>
 
     <string name="text29">Para editar el nombre pulse arriba a la izquierda. Para editar las fechas pulse arriba a la derecha. Para editar descripcion pulse abajo a la izquierda. Para liminar el item pulse abajo a la derecha. Para volver atras pulse en el medio.</string>
     <string name="text291">Para editar el nombe pulse arriba a la izquierda. Para editar la habilidad pulse arriba a la izquierda. Para eliminar el item pulse abajo. PAra volver atras pulse en el medio. </string>
@@ -112,8 +113,13 @@
     <string name="text33"> Datos trabajo. Para aplicar al empleo pulse arriba. Para volver atras pulse abajo.  </string>
     <string name="text34"> Su postulaciones ha sido realizada con exito. Dentro de poco recibira respuesta del empleador. Para volver atras pulse abajo.  </string>
     <string name="text35"> Para ver sus postulaciones pendientes pulse arriba. Para ver sus postulaciones aceptadas pulse abajo. Para volver atras pulse en el medio.  </string>
-    <string name="text36"> Info de la postulacion. Para ir a la siguiente postulacion pulse abajo a la derecha. Para ir a la anterior postulacion pulse abajo a la izquierda. Para vovler atras pulse en el medio. </string>
-    <string name="text37"> Lo sentimos. No tiene ninguna postulacion aceptada al momemnto. Para volver atras pulse abajo. </string>
+    <string name="text36">Para ir a la siguiente postulacion pulse abajo a la derecha. Para ir a la anterior postulacion pulse abajo a la izquierda. Para vovler atras pulse en el medio. </string>
+    <string name="text37"> Lo sentimos. No tiene ninguna postulacion aceptada al momento. Para volver atras pulse abajo. </string>
     <string name="text38"> Para ir a configuraciones pulse arriba a la izquierda. Para ir a ayuda pulse arriba a la derecha. Para cerrar sesion pulse abajo a la izquierda. Para ir a acerca pulse abajo a la derecha. Para ir a inicio pulse en el medio. </string>
+
+    <string name="text50">Para ir a accesibilidad pulse arriba a la izquierda. Para ir a idioma pulse arriba a la derecha. Para ir a uso de la app, pulse abajo a la izquierda. Para ir a privacidad, pulse abajo a la derecha. Para volver atras pulse en el medio </string>
+    <string name="text51">Para activar la accesibilidad especial para personas con discapacidad intelectual pulse arriba. Para activar la configuracion default pulse abajo. PAra volver atras pulse en el medio. </string>
+    <string name="text52">Si desea activar la configuracion especial para personas con discapacidad intelectual pulse arriba. Si quiere volver para atras, pulse abajo.</string>
+    <string name="text53">Si desea activar la configuracion default pulse arriba. Si quiere volver para atras, pulse abajo.</string>
 
 </resources>

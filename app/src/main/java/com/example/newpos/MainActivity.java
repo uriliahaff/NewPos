@@ -72,15 +72,17 @@ public class MainActivity extends AppCompatActivity {
     User user,usuarioRegistro;
     String tituloEditar,subtituloEditar,primeraFechaEditar,segundaFechaEditar,habilidadEditar;
     ArrayList<itemCV> itemCVList;
-    ArrayList<postulation> itemPostulations;
+    ArrayList<postulation> itemPostulations, postulacionesPendientes, postulacionesAceptadas;
     int codigoPedirPermiso;
     boolean editarImagen=false;
     User usuario;
     FirebaseUser userFB;
     String auxiliar;
     int iEditItem;
+    int empleoActual,postulacionActual;
+
     Bitmap bEditar;
-    Bitmap foto;
+    Bitmap foto, bmCertificado;
     int fechas,auxiliarPostulacion;
     job jobEditar;
     FrameLayout frame;
@@ -103,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
     TextView txtBarra;
     public String Mail,Password;
     private FirebaseAuth mAuth;
+    boolean certificado;
     ConstraintLayout barra;
     FirebaseStorage storage;
     @Override
@@ -130,10 +133,12 @@ public class MainActivity extends AppCompatActivity {
         mostrarInicio();
         mostrarPopUp();
         key="key";
+        bmCertificado=null;
         primeraFechaEditar=null;
         segundaFechaEditar=null;
         fechas=0;
         mostarNavBar();
+        certificado=false;
         itemEditar=new itemCV();
         jobEditar=new job();
         mAuth=FirebaseAuth.getInstance();
@@ -230,11 +235,21 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
     //Ir a empleo
     private void irEmpleos() {
         Log.d("Fragment","Llegue");
-        fragTrabajos miFragDeIngreso=new fragTrabajos();
-        TransaccionesDeFragment=AdminFragments.beginTransaction();
-        TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
-        TransaccionesDeFragment.commit();
+        if(configuracionActual==1){
+
+            fragTrabajo miFragDeIngreso=new fragTrabajo();
+            TransaccionesDeFragment=AdminFragments.beginTransaction();
+            TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
+            TransaccionesDeFragment.commit();        }
+        else {
+            fragTrabajos miFragDeIngreso=new fragTrabajos();
+            TransaccionesDeFragment=AdminFragments.beginTransaction();
+            TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
+            TransaccionesDeFragment.commit();
+        }
+
     }
+
 
     //Cargo inicio
     private void mostrarInicio() {
@@ -254,9 +269,62 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
         TransaccionesDeFragment.commit();
     }
 
+    public void changeConfiguracionVisual(){
+        configuracionActual=1;
+        irSettings(null);
+        fragment=50;
+        bottomNav.setVisibility(View.GONE);
+        barra.setVisibility(View.GONE);
+    }
+
+    public void irAccesibilidad(View view){
+        fragment=51;
+        fragAccesibilidad miFragDeIngreso=new fragAccesibilidad();
+        TransaccionesDeFragment=AdminFragments.beginTransaction();
+        TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
+        TransaccionesDeFragment.commit();
+    }
+
+    public void irConfirmarIntelectual(View view){
+        fragConfirmar miFragDeIngreso=new fragConfirmar();
+        TransaccionesDeFragment=AdminFragments.beginTransaction();
+        TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
+        TransaccionesDeFragment.commit();
+        fragment=52;
+    }
+
+    public void irConfirmarDefault(View view){
+        fragConfirmar miFragDeIngreso=new fragConfirmar();
+        TransaccionesDeFragment=AdminFragments.beginTransaction();
+        TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
+        TransaccionesDeFragment.commit();
+        fragment=53;
+    }
+
+    public void confirmo(View view){
+        if(fragment==52){
+            configuracionActual=2;
+            fragSettings miFragDeIngreso=new fragSettings();
+            TransaccionesDeFragment=AdminFragments.beginTransaction();
+            TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
+            TransaccionesDeFragment.commit();
+            mostarNavBar();
+            bottomNav.setOnNavigationItemSelectedListener(navListener);
+            bottomNav.setSelectedItemId(R.id.nav_more);
+            barra.setVisibility(View.VISIBLE);
+            ImageView flecha =findViewById(R.id.flecha);flecha.setVisibility(View.GONE);
+            txtBarra.setText("Mas");
+        }
+        else{
+
+        }
+    }
+
+
     //I a configuraciones
     public void irConfiguraciones(View view){
-       if(configuracionActual==1){
+
+        if(configuracionActual==1){
            configuracionActual=2;
        }
        else if(configuracionActual==2){
@@ -265,6 +333,18 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
        mostarNavBar();
         home();
     }
+
+    public void irSettings(View view){
+        fragSettings miFragDeIngreso=new fragSettings();
+        TransaccionesDeFragment=AdminFragments.beginTransaction();
+        TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
+        TransaccionesDeFragment.commit();
+if(configuracionActual!=1){
+    fragment=50;
+
+txtBarra.setText("Configuraciones");
+    ImageView flecha =findViewById(R.id.flecha);flecha.setVisibility(View.VISIBLE);
+}    }
 
     //I a configuraciones
     public int obtenerConfigActual(){
@@ -588,6 +668,7 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
                             data.put(("userCelular"),usuarioObtenido.get_userPhoneNumber());
                             data.put(("userDescription"),usuarioObtenido.get_userDescription());
                             data.put(("userLastname"),usuarioObtenido.get_userLastName());
+                            data.put(("userDate"),usuarioObtenido.get_userBirthDate());
                             data.put(("userName"),usuarioObtenido.get_userName());
                             data.put(("userNationality"),usuarioObtenido.get_userNationality());
                             data.put(("userProvince"),usuarioObtenido.get_userProvince());
@@ -605,15 +686,69 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
 
                                             Map<String, Object> data2 = new HashMap<>();
                                             data2.put(("id"),documentReference.getId());
-
+                                            auxiliar=documentReference.getId();
                                             db.collection("itemCV")
                                                     .add(data2)
                                                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                                         @Override
                                                         public void onSuccess(DocumentReference documentReference) {
                                                             Log.e("crearItemUsuario", "Perfecto");
-                                                            traerUsuario();
-                                                            mProgressDialog.dismiss();
+
+                                                            Map<String, Object> data3 = new HashMap<>();
+                                                            data3.put(("userID"),auxiliar);
+
+                                                            db.collection("userPostulations")
+                                                                    .add(data3)
+                                                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                                        @Override
+                                                                        public void onSuccess(DocumentReference documentReference) {
+                                                                            Log.e("crearPostulacionUsuario", "Perfecto");
+
+
+                                                                            if(bmCertificado!=null){
+                                                                                Log.d("subirCertificado","Vamo a editar");
+                                                                                // Create a storage reference from our app
+                                                                                StorageReference storageRef = storage.getReference();
+
+                                                                                StorageReference profilePicture = storageRef.child("/certificados/"+auxiliar+".jpg");
+
+                                                                                profilePicture.getName().equals(profilePicture.getName());    // true
+                                                                                profilePicture.getPath().equals(profilePicture.getPath());    // false
+
+                                                                                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                                                                                bmCertificado.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                                                                                byte[] data = baos.toByteArray();
+
+                                                                                UploadTask uploadTask = profilePicture.putBytes(data);
+                                                                                uploadTask.addOnFailureListener(new OnFailureListener() {
+                                                                                    @Override
+                                                                                    public void onFailure(@NonNull Exception exception) {
+                                                                                        Log.d("editarImagen","Salio mal");
+                                                                                        // Handle unsuccessful uploads
+                                                                                    }
+                                                                                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                                                                    @Override
+                                                                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                                                        traerUsuario();
+                                                                                        mProgressDialog.dismiss();
+                                                                                    }
+                                                                                });
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                traerUsuario();
+                                                                                mProgressDialog.dismiss();
+                                                                            }
+                                                                        }
+                                                                    })
+                                                                    .addOnFailureListener(new OnFailureListener() {
+                                                                        @Override
+                                                                        public void onFailure(@NonNull Exception e) {
+                                                                            Log.e("crearPostulacion", "Error al añadir el item", e);
+                                                                            Toast.makeText(getApplicationContext(), "Ocurrio un error y no se pudo agregar el item", Toast.LENGTH_SHORT).show();
+                                                                            mProgressDialog.dismiss();
+                                                                        }
+                                                                    });
 
                                                         }
                                                     })
@@ -646,8 +781,6 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
                         // ...
                     }
                 });
-
-
     }
 
 
@@ -660,6 +793,8 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
         TransaccionesDeFragment.commit();
         fragment=18;
     }
+
+
 
     //Si no tiene registro
     public void noTieneRegistro(View view)
@@ -1073,6 +1208,12 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
             flecha.setVisibility(View.GONE);
             txtBarra.setText("Mi Perfil");
         }
+        if (fragment == 50) {
+            irAcerca(null);
+            txtBarra.setText("Más");
+
+            ImageView flecha = findViewById(R.id.flecha);flecha.setVisibility(View.GONE);
+        }
     }
 
     public void pickNewProfilePicture(View view){
@@ -1092,6 +1233,23 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
         }
     }
 
+    public void pickCertificado(View view){
+    certificado=true;
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED)
+        {
+            Log.d("pickNewProfilePicture","No tiene permiso, deshabilito el boton de tomar fotos y pido permiso");
+            //Desactivar el boton
+            ActivityCompat.requestPermissions(this, new String[]
+                    {Manifest.permission.CAMERA,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE}, codigoPedirPermiso);
+        } else
+        {
+            Log.d("pickNewProfilePicture","Tiene permiso, habilito el boton de tomar fotos");
+            elegirNuevoPermiso();
+        }
+    }
+
+
     public void onRequestPermissionsResult(int codigoRespuesta, @NonNull String[] nombresPermisos, @NonNull int[] resultadosPermisos) {
         if (codigoRespuesta==codigoPedirPermiso){
             Log.d("PermisosPedidos","Permisos obtenidos: "+nombresPermisos.length);
@@ -1107,7 +1265,12 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
             }
             if (obtuvoTodosLosPermisos){
                 Log.d("PermisosPedidos","Obtuvo los permisos");
-                elegirNuevaFoto();
+                if(certificado=true){
+                    elegirNuevoPermiso();
+                }
+                else{
+                    elegirNuevaFoto();
+                }
             }else{
                 Log.d("PermisosPedidos","No obtuvo los permisos");
             }
@@ -1122,6 +1285,15 @@ intentObtenerFoto= new Intent(Intent.ACTION_GET_CONTENT);
     startActivityForResult(Intent.createChooser(intentObtenerFoto,"Seleccione foto"),codigoLlamadaElegirFoto);
 }
 
+    public void elegirNuevoPermiso(){
+        Intent intentObtenerPermiso;
+        intentObtenerPermiso= new Intent(Intent.ACTION_GET_CONTENT);
+        intentObtenerPermiso.setType("image/*");
+        Log.d("elegirFoto","Llamo a la activity");
+        startActivityForResult(Intent.createChooser(intentObtenerPermiso,"Seleccione foto"),codigoLlamadaElegirFoto);
+    }
+
+
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.d("FotoObtenida","Req:"+requestCode+" - Resul: "+resultCode);
@@ -1129,7 +1301,12 @@ intentObtenerFoto= new Intent(Intent.ACTION_GET_CONTENT);
             Log.d("FotoObtenida","Foto tomada OK");
             foto=(Bitmap)data.getExtras().get("data");
             Log.d("FotoObtenida","Mando a procesar la imagen");
-            procesarFoto(foto);
+            if(certificado=true){
+                procesarCertificado(foto);
+            }
+            else{
+                procesarFoto(foto);
+            }
         }
         if(requestCode==codigoLlamadaElegirFoto&&resultCode==RESULT_OK&&data!=null){
             Uri ubicacion=data.getData();
@@ -1139,8 +1316,12 @@ intentObtenerFoto= new Intent(Intent.ACTION_GET_CONTENT);
             }catch (Exception error){ Log.d("FotoObtenida","Error: "+error); }
             if(foto!=null){
                 Log.d("FotoObtenida","Mando a procesar la imagen");
-                procesarFoto(foto);
-            }
+                if(certificado=true){
+                    procesarCertificado(foto);
+                }
+                else{
+                    procesarFoto(foto);
+                }            }
 
         }
     }
@@ -1149,6 +1330,11 @@ intentObtenerFoto= new Intent(Intent.ACTION_GET_CONTENT);
         bEditar=foto;
         irEditarProfilePicture(null);
     }
+
+    public void procesarCertificado(Bitmap foto){
+        bmCertificado=foto;
+    }
+
 public Bitmap traerImagenSeleccionada(){return bEditar;}
 
     public Bitmap traerImagenDePerfil(){return imagenActual;}
@@ -1166,7 +1352,7 @@ public void editarImagen(final Bitmap foto){
     mProgressDialog.setMessage("Cargando...");
     mProgressDialog.show();
 
-        Log.d("editarImagen","Vamo a editar");
+    Log.d("editarImagen","Vamo a editar");
     // Create a storage reference from our app
     StorageReference storageRef = storage.getReference();
 
@@ -1764,15 +1950,91 @@ if(fragment==292){fragment=312;}
     //Va  al fragment de Jobs
         public void irTrabajo (View view)
         {
-            fragTrabajo miFragDeIngreso=new fragTrabajo();
-            TransaccionesDeFragment=AdminFragments.beginTransaction();
-            TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
-            TransaccionesDeFragment.commit();
+            empleoActual=0;
+           cargarListaEmpleos();
             fragment=35;
         }
 
+    public void siguienteTrabajo (View view)
+    {
+        if(empleoActual==arrayAuxiliar.size()-1){
+            empleoActual=0;
+        }
+        else{
+            empleoActual++;
+        }
+        irEmpleos();
+    }
 
-        //Para ver mas informacion de empleos
+    public void anteriorTrabajo (View view)
+    {
+    if(empleoActual==0){
+    empleoActual=arrayAuxiliar.size()-1;
+    }
+    else{
+        empleoActual--;
+    }
+        irEmpleos();
+    }
+
+    public void siguientePostulacionPendiente (View view)
+    {
+        if(postulacionActual==postulacionesPendientes.size()-1){
+            postulacionActual=0;
+        }
+        else{
+            postulacionActual++;
+        }
+        fragPostulacionesPendientes miFragDeIngreso=new fragPostulacionesPendientes();
+        TransaccionesDeFragment=AdminFragments.beginTransaction();
+        TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
+        TransaccionesDeFragment.commit();
+    }
+
+    public void anteriorPostulacionPendiente (View view)
+    {
+        if(postulacionActual==0){
+            postulacionActual=postulacionesPendientes.size()-1;
+        }
+        else{
+            postulacionActual--;
+        }
+        fragPostulacionesPendientes miFragDeIngreso=new fragPostulacionesPendientes();
+        TransaccionesDeFragment=AdminFragments.beginTransaction();
+        TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
+        TransaccionesDeFragment.commit();
+    }
+
+    public void siguientePostulacionAceptada (View view)
+    {
+        if(postulacionActual==postulacionesAceptadas.size()-1){
+            postulacionActual=0;
+        }
+        else{
+            postulacionActual++;
+        }
+        fragPostulacionesPendientes miFragDeIngreso=new fragPostulacionesPendientes();
+        TransaccionesDeFragment=AdminFragments.beginTransaction();
+        TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
+        TransaccionesDeFragment.commit();
+    }
+
+    public void anteriorPostulacionAceptada(View view)
+    {
+        if(postulacionActual==0){
+            postulacionActual=postulacionesAceptadas.size()-1;
+        }
+        else{
+            postulacionActual--;
+        }
+        fragPostulacionesPendientes miFragDeIngreso=new fragPostulacionesPendientes();
+        TransaccionesDeFragment=AdminFragments.beginTransaction();
+        TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
+        TransaccionesDeFragment.commit();
+    }
+
+
+    //Para ver mas informacion de empleos
     public void moreInformation (View view)
     {
         fragMoreInfo miFragDeIngreso=new fragMoreInfo();
@@ -1785,7 +2047,10 @@ if(fragment==292){fragment=312;}
     //Para postularse a un empleo
     public void Postular (View view)
     {
-        final ProgressDialog mProgressDialog = new ProgressDialog(this);
+if(configuracionActual==1){
+    jobEditar=arrayAuxiliar.get(empleoActual);
+
+}        final ProgressDialog mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage("Cargando...");
         mProgressDialog.show();
         Map<String, Object> data = new HashMap<>();
@@ -1857,6 +2122,9 @@ if(fragment==292){fragment=312;}
                                 itemPostulations.add(unaPostulation);
                                 mProgressDialog.dismiss();
                             }
+                            if(configuracionActual==1){
+                                analizarPostulaciones();
+                            }
                             irVistaPostular();
                         } else {
                             Log.d("traerItems", "Error getting documents: ", task.getException());
@@ -1867,6 +2135,27 @@ if(fragment==292){fragment=312;}
                 });
     }
 
+    public void analizarPostulaciones(){
+postulacionesAceptadas=new ArrayList<>();
+postulacionesPendientes=new ArrayList<>();
+        for (int i=0;i<itemPostulations.size();i++){
+            postulation unPos= itemPostulations.get(i);
+            if(unPos.get_postulationStatus()!=null){
+            if(unPos.get_postulationStatus().equals("0")){
+            postulacionesPendientes.add(unPos);
+            }
+            if(unPos.get_postulationStatus().equals("1")){
+                postulacionesAceptadas.add(unPos);
+            }
+            if(unPos.get_postulationStatus().equals("2")){
+
+            }
+        }
+        }
+
+    }
+
+
     public void irVistaPostular(){
         fragPostulacionesPendientesAceptadas miFragDeIngreso=new fragPostulacionesPendientesAceptadas();
         TransaccionesDeFragment=AdminFragments.beginTransaction();
@@ -1875,24 +2164,60 @@ if(fragment==292){fragment=312;}
         fragment=38;
     }
 
+
+    public job enviarEmpleoActual(){
+        return arrayAuxiliar.get(empleoActual);
+    }
+
+    public postulation enviarPostulacionPendienteActual(){
+        return postulacionesPendientes.get(postulacionActual);
+    }
+
+    public postulation enviarPostulacionAceptadaActual(){
+        return postulacionesAceptadas.get(postulacionActual);
+    }
+
     //Para ver postulaciones pendientes
     public void PostulacionesPenidentes (View view)
     {
-        fragPostulacionesPendientes miFragDeIngreso=new fragPostulacionesPendientes();
-        TransaccionesDeFragment=AdminFragments.beginTransaction();
-        TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
-        TransaccionesDeFragment.commit();
-        fragment=39;
+        postulacionActual=0;
+
+        if(postulacionesPendientes.size()==0){
+            fragNoPostulacionAceptada miFragDeIngreso=new fragNoPostulacionAceptada();
+            TransaccionesDeFragment=AdminFragments.beginTransaction();
+            TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
+            TransaccionesDeFragment.commit();
+            fragment=391;
+        }
+        else{
+            fragPostulacionesPendientes miFragDeIngreso=new fragPostulacionesPendientes();
+            TransaccionesDeFragment=AdminFragments.beginTransaction();
+            TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
+            TransaccionesDeFragment.commit();
+            fragment=39;
+        }
+
     }
 
     //Para ver postulaciones aceptadas
     public void PostulacionesAceptadas (View view)
     {
-        fragNoPostulacionAceptada miFragDeIngreso=new fragNoPostulacionAceptada();
-        TransaccionesDeFragment=AdminFragments.beginTransaction();
-        TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
-        TransaccionesDeFragment.commit();
-        fragment=40;
+        postulacionActual=0;
+        if(postulacionesAceptadas.size()==0){
+            fragNoPostulacionAceptada miFragDeIngreso=new fragNoPostulacionAceptada();
+            TransaccionesDeFragment=AdminFragments.beginTransaction();
+            TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
+            TransaccionesDeFragment.commit();
+            fragment=40;
+        }
+        else{
+            fragPostulacionesAceptadas miFragDeIngreso=new fragPostulacionesAceptadas();
+            TransaccionesDeFragment=AdminFragments.beginTransaction();
+            TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
+            TransaccionesDeFragment.commit();
+            fragment=401;
+        }
+
     }
 
     //Para ir a acerca
@@ -1912,6 +2237,7 @@ if(fragment==292){fragment=312;}
         user=new User();
         auxiliar="";
         foto=null;
+        bmCertificado=null;
         imagenActual=null;
         mAuth.signOut();
         bottomNav.setVisibility(View.GONE);

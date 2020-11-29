@@ -29,11 +29,18 @@ int i;
         }
         if (i == 2) {
             VistaADevolver = inflador.inflate(R.layout.acerca_intelectual, container, false);
-            LinearLayout ln = VistaADevolver.findViewById(R.id.signOut);
-            ln.setOnClickListener(new View.OnClickListener() {
+            LinearLayout lnSO = VistaADevolver.findViewById(R.id.signOut);
+            LinearLayout lnSettings = VistaADevolver.findViewById(R.id.layoutsettings);
+            lnSO.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
                     Log.d("itemEditar","Se pulso");
                     actPrincipal.LogOut(null);
+                }
+            });
+            lnSettings.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    Log.d("itemEditar","Se pulso");
+                    actPrincipal.irSettings(null);
                 }
             });
         }
