@@ -64,6 +64,8 @@
     <string name="PostulationRechazada1">Su postulación de</string>
     <string name="PostulationRechazada2">ha sido rechazada.</string>
     <string name="SorryPostulaciones">No tiene postulaciones aceptadas por el momento.</string>
+    <string name="SorryPostulaciones1">No tiene postulaciones pendientes por el momento.</string>
+
     <string name="SignOut">Sign Out</string>
     <string name="UploadPicture">Subir imagen</string>
     <string name="EditProfilePicture">Editar foto de perfil</string>

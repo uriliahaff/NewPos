@@ -129,15 +129,14 @@ public class MainActivity extends AppCompatActivity {
         usuario=new User();
         auxiliar= null;
         arrayAuxiliar=new ArrayList<job>();
-        configuracionActual=1;
+        configuracionActual=2;
         mostrarInicio();
-        mostrarPopUp();
         key="key";
         bmCertificado=null;
         primeraFechaEditar=null;
         segundaFechaEditar=null;
         fechas=0;
-        mostarNavBar();
+       // mostarNavBar();
         certificado=false;
         itemEditar=new itemCV();
         jobEditar=new job();
@@ -159,6 +158,12 @@ public class MainActivity extends AppCompatActivity {
         public void recibirProfile(Bitmap bp){
         imagenActual=bp;
         }
+
+        public void irPerfilAcerca(View v){traerItems();            bottomNav.setOnNavigationItemSelectedListener(navListener);bottomNav.setSelectedItemId(R.id.nav_profile); }
+        public void irTrabajosAcerca(View v){cargarListaEmpleos();            bottomNav.setOnNavigationItemSelectedListener(navListener);bottomNav.setSelectedItemId(R.id.nav_jobs); }
+        public void irPostulacionesAcerca(View v){irPostulaciones(null);            bottomNav.setOnNavigationItemSelectedListener(navListener);bottomNav.setSelectedItemId(R.id.nav_aplicant); }
+
+
 
 private BottomNavigationView.OnNavigationItemSelectedListener navListener=
         new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -220,9 +225,11 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
                                 unJob.set_jobDays((String) document.get("jobDays"));
                                 unJob.set_jobTime((String) document.get("jobTime"));
                                 unJob.set_documentPath(document.getId());
-                                arrayAuxiliar.add(unJob);
                                 mProgressDialog.dismiss();
                                 irEmpleos();
+                                arrayAuxiliar.add(unJob);
+
+
                             }
                         } else {
                             Log.d("traerItems", "Error getting documents: ", task.getException());
@@ -254,11 +261,16 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
     //Cargo inicio
     private void mostrarInicio() {
         Log.d("Fragment","Llegue");
-        fragLoginsignupSiNo miFragDeIngreso=new fragLoginsignupSiNo();
-        TransaccionesDeFragment=AdminFragments.beginTransaction();
-        TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
-        TransaccionesDeFragment.commit();
-        fragment=1;
+            fragLoginsignupSiNo miFragDeIngreso=new fragLoginsignupSiNo();
+            TransaccionesDeFragment=AdminFragments.beginTransaction();
+            TransaccionesDeFragment.replace(R.id.FrameParaFragmentIngreso, miFragDeIngreso);
+            TransaccionesDeFragment.commit();
+            fragment=1;
+        bottomNav.setVisibility(View.GONE);
+        barra.setVisibility(View.GONE);
+        txtBarra.setVisibility(View.GONE);
+
+
     }
 
     //Muestra el popup
@@ -584,6 +596,7 @@ txtBarra.setText("Configuraciones");
                                     mostarNavBar();
                                     bottomNav.setOnNavigationItemSelectedListener(navListener);
                                     bottomNav.setSelectedItemId(R.id.nav_home);
+                                    txtBarra.setVisibility(View.VISIBLE);
                                 }
 
                             }
@@ -1204,6 +1217,7 @@ txtBarra.setText("Configuraciones");
         if (fragment == 999 || fragment==22) {
             perfil();
             mostarNavBar();
+            editarImagen=false;
             ImageView flecha = findViewById(R.id.flecha);
             flecha.setVisibility(View.GONE);
             txtBarra.setText("Mi Perfil");
@@ -1237,14 +1251,14 @@ txtBarra.setText("Configuraciones");
     certificado=true;
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED)
         {
-            Log.d("pickNewProfilePicture","No tiene permiso, deshabilito el boton de tomar fotos y pido permiso");
+            Log.d("pickCertificado","No tiene permiso, deshabilito el boton de tomar fotos y pido permiso");
             //Desactivar el boton
             ActivityCompat.requestPermissions(this, new String[]
                     {Manifest.permission.CAMERA,
                             Manifest.permission.WRITE_EXTERNAL_STORAGE}, codigoPedirPermiso);
         } else
         {
-            Log.d("pickNewProfilePicture","Tiene permiso, habilito el boton de tomar fotos");
+            Log.d("pickCertificado","Tiene permiso, habilito el boton de tomar fotos");
             elegirNuevoPermiso();
         }
     }
@@ -1302,9 +1316,11 @@ intentObtenerFoto= new Intent(Intent.ACTION_GET_CONTENT);
             foto=(Bitmap)data.getExtras().get("data");
             Log.d("FotoObtenida","Mando a procesar la imagen");
             if(certificado=true){
+                Log.d("FotoObtenida","Mando a procesar el certificado");
                 procesarCertificado(foto);
             }
             else{
+                Log.d("FotoObtenida","Mando a procesar la imagen");
                 procesarFoto(foto);
             }
         }
@@ -1316,7 +1332,7 @@ intentObtenerFoto= new Intent(Intent.ACTION_GET_CONTENT);
             }catch (Exception error){ Log.d("FotoObtenida","Error: "+error); }
             if(foto!=null){
                 Log.d("FotoObtenida","Mando a procesar la imagen");
-                if(certificado=true){
+                if(certificado==true){
                     procesarCertificado(foto);
                 }
                 else{
@@ -1327,11 +1343,13 @@ intentObtenerFoto= new Intent(Intent.ACTION_GET_CONTENT);
     }
 
     public void procesarFoto(Bitmap foto){
+        Log.d("procesar","Vamo a imprimir la foto");
         bEditar=foto;
         irEditarProfilePicture(null);
     }
 
     public void procesarCertificado(Bitmap foto){
+        Log.d("procesar","Vamo a guardar el certificado");
         bmCertificado=foto;
     }
 

@@ -62,6 +62,10 @@ ArrayList<postulation> listPostulations,list1,list2,list0;
             }
             if (list0.size() == 0) {
                 View child_1 = getLayoutInflater().inflate(R.layout.no_postulation, null);
+                TextView txtTitulo = child_1.findViewById(R.id.Principal);
+                TextView txtSecundario = child_1.findViewById(R.id.Secundario);
+                txtTitulo.setText(getString(R.string.Sorry));
+                txtSecundario.setText(getString(R.string.SorryPostulaciones1));
                 requestLayout.addView(child_1);
 
             } else {

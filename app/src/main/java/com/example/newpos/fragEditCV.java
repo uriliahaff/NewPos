@@ -78,11 +78,15 @@ int i;
                     });
                     layoutEducation.addView(child_1);
                 }
+            }
+            else{
                 View child_1 = getLayoutInflater().inflate(R.layout.add_item, null);
                 TextView txto  = child_1.findViewById(R.id.texto);
                 txto.setText(getString(R.string.AddEstudios));
                 layoutEducation.addView(child_1);
+
             }
+
             if (arrayListExperiencia.size() != 0) {
                 for (int i = 0; i < arrayListExperiencia.size(); i++) {
                     View child_1 = getLayoutInflater().inflate(R.layout.item_educacion, null);
@@ -102,8 +106,10 @@ int i;
                     });
                     layoutExperiencia.addView(child_1);
                 }
+            }
+            else {
                 View child_1 = getLayoutInflater().inflate(R.layout.add_item, null);
-                TextView txto  = child_1.findViewById(R.id.texto);
+                TextView txto = child_1.findViewById(R.id.texto);
                 txto.setText(getString(R.string.AddExperience));
                 layoutExperiencia.addView(child_1);
             }
@@ -177,6 +183,12 @@ int i;
                     });
                     layoutSkills.addView(child_1);
                 }
+                View child_1 = getLayoutInflater().inflate(R.layout.add_item, null);
+                TextView txto  = child_1.findViewById(R.id.texto);
+                txto.setText(getString(R.string.AddSkill));
+                layoutSkills.addView(child_1);
+            }
+            else{
                 View child_1 = getLayoutInflater().inflate(R.layout.add_item, null);
                 TextView txto  = child_1.findViewById(R.id.texto);
                 txto.setText(getString(R.string.AddSkill));

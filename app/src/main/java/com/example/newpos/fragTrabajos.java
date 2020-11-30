@@ -1,6 +1,9 @@
 package com.example.newpos;
 
 import android.app.Fragment;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +17,10 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class fragTrabajos extends Fragment  {
@@ -21,7 +28,10 @@ public class fragTrabajos extends Fragment  {
     View VistaADevolver;
     LinearLayout empleosLayout;
     ArrayList<job> arrayListJobs;
-    ImageView flecha;
+    ImageView logo;
+    Bitmap logoBP;
+    int posicion;
+    ArrayList<View> arrayEmpleos;
     //onCreateView
 
     // "Atar" el fragment al layout correspondiente
@@ -32,6 +42,7 @@ public class fragTrabajos extends Fragment  {
         final MainActivity actPrincipal;
         actPrincipal = (MainActivity) getActivity();
         i=actPrincipal.obtenerConfigActual();
+        arrayEmpleos=new ArrayList<>();
         VistaADevolver=null;
         if (i == 1) {
 
@@ -63,8 +74,13 @@ public class fragTrabajos extends Fragment  {
             else {
 
             }
+
 }
+
         return VistaADevolver;
     }
+
+
+
 }
 

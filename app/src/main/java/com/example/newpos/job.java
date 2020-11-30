@@ -10,8 +10,9 @@ public class job {
     private String jobAdress;
     private String jobDays;
     private String jobTime;
-    private Bitmap jobImage1;
-    private Bitmap jobImage2;
+    private String logo;
+    private String place;
+
     private String documentPath;
 //Constructor
     public job(){
@@ -50,4 +51,13 @@ public void set_jobTime (String jobTime){this.jobTime=jobTime;}
 //documentPath
 public String get_documentPath (){return documentPath;}
 public void set_documentPath (String documentPath){this.documentPath=documentPath;}
+
+//logo
+public String get_logo (){return logo;}
+public void set_logo (String logo){this.logo=logo;}
+
+//documentPath
+public String get_place (){return place;}
+public void set_place (String place){this.place=place;}
+
 }

@@ -148,7 +148,7 @@
         app:layout_constraintRight_toRightOf="@+id/large2_guideline"
         app:layout_constraintTop_toTopOf="@id/ancho1_guideline"
         android:background="@drawable/et_style"
-        android:onClick="prueba1"
+        android:onClick="nothing"
         android:elevation="10dp">
     </FrameLayout>
 

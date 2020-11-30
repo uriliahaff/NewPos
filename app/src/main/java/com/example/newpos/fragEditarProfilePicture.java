@@ -35,7 +35,6 @@ public class fragEditarProfilePicture extends Fragment  {
         actPrincipal = (MainActivity) getActivity();
         i = actPrincipal.obtenerConfigActual();
         User usuario = actPrincipal.enviarUsuario();
-
         View VistaADevolver = null;
         if (i == 2) {
             VistaADevolver = inflador.inflate(R.layout.editar_profile_picture, container, false);        //Muestro popUp
@@ -51,13 +50,20 @@ public class fragEditarProfilePicture extends Fragment  {
         }
         boolean fotoEditadaNueva = actPrincipal.enviarSiSeCambio();
         profileImage = VistaADevolver.findViewById(R.id.profile_image);
-        if (fotoEditadaNueva == true) {
 
-             foto= actPrincipal.traerImagenSeleccionada();
+        if (fotoEditadaNueva == true) {
+            Log.d("fotoEditadaNueva","Hay imagen nueva");
+
+            foto= actPrincipal.traerImagenSeleccionada();
             profileImage.setImageBitmap(foto);
             actPrincipal.changeEstadoEdit();
-        } else {
-             foto = actPrincipal.traerImagenDePerfil();
+        }
+
+        else {
+
+            Log.d("fotoEditadaNueva","No hay imagen nueva");
+
+            foto = actPrincipal.traerImagenDePerfil();
             if (foto == null) {
                 descargarFoto miTarea=new descargarFoto();
                 miTarea.execute(usuario.get_userProfilePicture());
