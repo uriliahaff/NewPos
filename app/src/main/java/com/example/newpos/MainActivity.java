@@ -224,6 +224,9 @@ private BottomNavigationView.OnNavigationItemSelectedListener navListener=
                                 unJob.set_jobAdress((String) document.get("jobAdress"));
                                 unJob.set_jobDays((String) document.get("jobDays"));
                                 unJob.set_jobTime((String) document.get("jobTime"));
+                                unJob.set_logo((String) document.get("jobLogo"));
+                                unJob.set_place((String) document.get("jobPlace"));
+
                                 unJob.set_documentPath(document.getId());
                                 mProgressDialog.dismiss();
                                 irEmpleos();
@@ -2080,6 +2083,7 @@ if(configuracionActual==1){
         data.put(("jobRequired"),jobEditar.get_jobRequired());
         data.put(("jobTime "),jobEditar.get_jobTime());
         data.put(("jobName"),jobEditar.get_jobName());
+        data.put(("jobLogo"),jobEditar.get_logo());
         data.put(("companyMail"),"");
         data.put(("companyMensaje"),"");
         data.put(("postulationStatus"),"0");
@@ -2133,6 +2137,7 @@ if(configuracionActual==1){
                                 unaPostulation.set_jobDays((String) document.get("jobDays"));
                                 unaPostulation.set_jobTime((String) document.get("jobTime"));
                                 unaPostulation.set_companyMail((String) document.get("companyMail"));
+                                unaPostulation.set_logo((String) document.get("jobLogo"));
                                 unaPostulation.set_companyMensaje((String) document.get("companyMensaje"));
                                 unaPostulation.set_userID((String)document.get("userID"));
                                 unaPostulation.set_postulationStatus((String)document.get("postulationStatus"));

@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
+
 public class fragTrabajoSeleccionado extends Fragment  {
 job unJob;
     EditText txtUno,txtCuatro;
@@ -38,6 +40,8 @@ job unJob;
         TextView txt5 = VistaADevolver.findViewById(R.id.txtCinco);
         TextView txt6 = VistaADevolver.findViewById(R.id.txtSeis);
         TextView txt7 = VistaADevolver.findViewById(R.id.txtSiete);
+
+
         txtPrincipal.setText(unJob.get_jobCompany());
         txtSecundario.setText(unJob.get_jobName());
         txt3.setText(unJob.get_jobRequired());

@@ -14,8 +14,8 @@ public class postulation {
     private String postulationStatus;
     private String companyMail;
     private String companyMensaje;
-    private Bitmap jobImage1;
-    private Bitmap jobImage2;
+    private String logo;
+
     private String documentPath;
 //Constructor
     public postulation(){
@@ -70,5 +70,9 @@ public void set_jobTime (String jobTime){this.jobTime=jobTime;}
 //documentPath
 public String get_documentPath (){return documentPath;}
 public void set_documentPath (String documentPath){this.documentPath=documentPath;}
+
+    //logo
+    public String get_logo (){return logo;}
+    public void set_logo (String logo){this.logo=logo;}
 
 }

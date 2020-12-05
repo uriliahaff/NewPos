@@ -7,11 +7,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -74,6 +77,12 @@ ArrayList<postulation> listPostulations,list1,list2,list0;
                 View child_1 = getLayoutInflater().inflate(R.layout.item_postulaciones, null);
                 TextView txtTitulo = child_1.findViewById(R.id.Principal);
                 TextView txtSecundario = child_1.findViewById(R.id.Secundario);
+                ImageView img= child_1.findViewById(R.id.imgCompany);
+
+                if (unPostulation.get_logo()!=null) {
+                        Glide.with(this).load(unPostulation.get_logo()).into(img);
+
+                }
                 TextView txtPath = child_1.findViewById(R.id.txtPath);
                 txtTitulo.setText(unPostulation.get_jobCompany());
                 txtSecundario.setText(unPostulation.get_jobName());
@@ -105,6 +114,13 @@ ArrayList<postulation> listPostulations,list1,list2,list0;
                     txtTitulo.setText(unPostulation.get_jobCompany());
                     txtSecundario.setText(unPostulation.get_jobName());
                     final String path = unPostulation.get_documentPath();
+                    ImageView img= child_1.findViewById(R.id.imgCompany);
+
+                    if (unPostulation.get_logo()!=null) {
+                        Glide.with(this).load(unPostulation.get_logo()).into(img);
+
+                    }
+
                     txtPath.setText(path);
                     child_1.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View view) {
@@ -128,6 +144,14 @@ ArrayList<postulation> listPostulations,list1,list2,list0;
                     txtSecundario.setText(unPostulation.get_jobName());
                     final String path = unPostulation.get_documentPath();
                     txtPath.setText(path);
+                    ImageView img= child_1.findViewById(R.id.imgCompany);
+
+                    if (unPostulation.get_logo()!=null) {
+                        Glide.with(this).load(unPostulation.get_logo()).into(img);
+
+                    }
+
+
                     child_1.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View view) {
                             Log.d("itemEditar", "Se pulso");

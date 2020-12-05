@@ -17,6 +17,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
+import com.bumptech.glide.Glide;
+
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -58,8 +60,13 @@ public class fragTrabajos extends Fragment  {
                     TextView txtSecundario=child_1.findViewById(R.id.Secundario);
                     TextView txtTitulo=child_1.findViewById(R.id.Principal);
                     TextView txtPath=child_1.findViewById(R.id.txtPath);
+                    ImageView img=child_1.findViewById(R.id.imgCompany);
                     txtTitulo.setText(unJob.get_jobCompany());
                     txtSecundario.setText(unJob.get_jobName());
+                    if (unJob.get_logo()!=null) {
+                        Glide.with(this).load(unJob.get_logo()).into(img);
+
+                    }
                     final String path=unJob.get_documentPath();
                     txtPath.setText(path);
                     child_1.setOnClickListener(new View.OnClickListener() {
