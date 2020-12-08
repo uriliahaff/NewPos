@@ -33,7 +33,7 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project / Acerca Del Proyecto
+## About The Project / Acerca Del Proyecto :clipboard:
 
 <strong>NewPos</strong> is a personal project that was created in 2020 within the educational framework of the ORT Argentina School as the "Final Project" of the Bachelor's degree in Computer Science with a specialization in design and development of mobile and web applications. NewPos was developed with the intention of helping people with disabilities, the most excluded from the labor market, to be able to find employment by opening <strong>New Pos</strong>sibilities from an <strong>app</strong> to facilitate access to inclusive jobs, being comfortable for the user, adapting to it and the type of functional diversity that the user have in order to avoid frustrations when using the app.
 
