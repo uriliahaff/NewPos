@@ -15,11 +15,7 @@
       <p>About The Project / Acerca Del Proyecto</p>
     </li>
     <li>
-      <p> Built with / Acerca Del Proyecto</p>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
+      <p> Built with / Construido Con</p>
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
@@ -41,11 +37,20 @@
 
 ### Built With / Construido Con :hammer:
 
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
-* [Laravel](https://laravel.com)
+* [Andriod Studio](https://developer.android.com/studio)
+* [FireBase](https://firebase.google.com/)
 
+<div class="row">
+  <div class="column">
+    <img src="img_snow.jpg" alt="AndriodStudio" style="width:100%">
+  </div>
+  <div class="column">
+
+</div>
+  <div class="column">
+    <img src="https://cdn.shortpixel.ai/client/q_glossy,ret_img,w_502,h_518/https://keytotech.com/wp-content/uploads/2019/05/firebase.png" alt="FireBase" style="width:100%">
+  </div>
+</div>
 
 
 <!-- GETTING STARTED -->
