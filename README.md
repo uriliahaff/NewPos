@@ -13,12 +13,9 @@
   <ol>
     <li>
       <p>About The Project / Acerca Del Proyecto</p>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
+      <p> Built with / Acerca Del Proyecto</p>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
@@ -42,7 +39,7 @@
 
 <strong>NewPos</strong> es un proyecto personal que surgió en el año 2020 en el marco educativo de la Escuela ORT Argentina como "Proyecto Final" del Bachillerato en informática con especialización en diseño y desarrollo de aplicaciones móviles y web. NewPos surge con la intención de ayudar a la gente con discapacidad, la más excluida del mercado laboral, a poder encontrar empleo abriendo nuevas posibilidades a partir de una <strong>app</strong> para facilitar el acceso a empleos inclusivos, siendo cómodo al usuario, adaptándose al mismo y el tipo de diversidad funcional que posee para que no se frustre a la hora de utilizar la app. 
 
-### Built With / preuba
+### Built With / Construido Con :hammer:
 
 This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 * [Bootstrap](https://getbootstrap.com)
