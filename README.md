@@ -40,18 +40,10 @@
 * [Andriod Studio](https://developer.android.com/studio)
 * [FireBase](https://firebase.google.com/)
 
-<div class="row">
-  <div class="column">
-    <img src="img_snow.jpg" alt="AndriodStudio" style="width:100%">
-  </div>
-  <div class="column">
-
-</div>
-  <div class="column">
-    <img src="https://cdn.shortpixel.ai/client/q_glossy,ret_img,w_502,h_518/https://keytotech.com/wp-content/uploads/2019/05/firebase.png" alt="FireBase" style="width:100%">
-  </div>
-</div>
-
+<p float="left">
+  <img src="https://2.bp.blogspot.com/-tzm1twY_ENM/XlCRuI0ZkRI/AAAAAAAAOso/BmNOUANXWxwc5vwslNw3WpjrDlgs9PuwQCLcBGAsYHQ/s1600/pasted%2Bimage%2B0.png" width="100" />
+  <img src="https://cdn.shortpixel.ai/client/q_glossy,ret_img,w_502,h_518/https://keytotech.com/wp-content/uploads/2019/05/firebase.png" width="100" /> 
+</p>
 
 <!-- GETTING STARTED -->
 ## Getting Started
