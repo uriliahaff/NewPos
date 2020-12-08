@@ -12,7 +12,7 @@
   <summary>Index / Indice</summary>
   <ol>
     <li>
-      <a href="#about-the-project/acerca-del-proyecto">About The Project / Acerca Del Proyecto</a>
+      <p>About The Project / Acerca Del Proyecto</p>
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
