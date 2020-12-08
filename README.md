@@ -12,7 +12,7 @@
   <summary>Index / Indice</summary>
   <ol>
     <li>
-      <a href="#About-The-Project-/-Acerca-Del-Proyecto">About The Project / Acerca Del Proyecto</a>
+      <a href="#">About The Project / Acerca Del Proyecto</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
@@ -51,7 +51,7 @@ Of course, no one template will serve all projects since your needs may be diffe
 
 A list of commonly used resources that I find helpful are listed in the acknowledgements.
 
-### Built With
+### Built With / preuba
 
 This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 * [Bootstrap](https://getbootstrap.com)
