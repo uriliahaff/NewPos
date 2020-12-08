@@ -17,18 +17,27 @@
     <li>
       <p> Built with / Construido Con</p>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
+      <li>
+      <p> About The App / Acerca De La App</p>
+    </li>
+        <li>
+      <p> Statistics / Estadísticas</p>
+    </li>
+        <li>
+      <p> Authors/ Autores</p>
+    </li>
+        <li>
+      <p> Licence / Licencia</p>
+    </li>
+        <li>
+      <p> Contact / Contacto</p>
+    </li>
   </ol>
 </details>
 
 
 
-<!-- ABOUT THE PROJECT -->
+
 ## About The Project / Acerca Del Proyecto :clipboard:
 
 <strong>NewPos</strong> is a personal project that was created in 2020 within the educational framework of the ORT Argentina School as the "Final Project" of the Bachelor's degree in Computer Science with a specialization in design and development of mobile and web applications. NewPos was developed with the intention of helping people with disabilities, the most excluded from the labor market, to be able to find employment by opening <strong>New Pos</strong>sibilities from an <strong>app</strong> to facilitate access to inclusive jobs, being comfortable for the user, adapting to it and the type of functional diversity that the user have in order to avoid frustrations when using the app.
@@ -46,44 +55,23 @@
   <img src="https://cdn.shortpixel.ai/client/q_glossy,ret_img,w_502,h_518/https://keytotech.com/wp-content/uploads/2019/05/firebase.png" height="250" width="250" /> 
 </p>
 
-<!-- GETTING STARTED -->
-## Getting Started
+## About The App / Acerca De La App :iphone:
 
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
-### Installation
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```JS
-   const API_KEY = 'ENTER YOUR API';
-   ```
 
 
+## Statistics / Estadísticas :chart_with_upwards_trend:	
 
-<!-- USAGE EXAMPLES -->
-## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+## Authors / Autores :man:
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+## Licence / Licencia :page_facing_up:
+
+## Contact / Contacto :email:
+
+
 
 
 
