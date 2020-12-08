@@ -35,7 +35,7 @@
 
 <strong>NewPos</strong> es un proyecto personal que surgió en el año 2020 en el marco educativo de la Escuela ORT Argentina como "Proyecto Final" del Bachillerato en informática con especialización en diseño y desarrollo de aplicaciones móviles y web. NewPos surge con la intención de ayudar a la gente con discapacidad, la más excluida del mercado laboral, a poder encontrar empleo abriendo nuevas posibilidades a partir de una <strong>app</strong> para facilitar el acceso a empleos inclusivos, siendo cómodo al usuario, adaptándose al mismo y el tipo de diversidad funcional que posee para que no se frustre a la hora de utilizar la app. 
 
-### Built With / Construido Con :hammer:
+## Built With / Construido Con :hammer:
 
 * [Andriod Studio](https://developer.android.com/studio)
 * [FireBase](https://firebase.google.com/)
