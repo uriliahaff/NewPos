@@ -2,10 +2,9 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-    <img src="images/logo.png" alt="Logo" width="150" height="150">
+    <img src="https://user-images.githubusercontent.com/57404639/101440533-ab7a6400-38f5-11eb-9022-28a904c70cf1.png" alt="Logo" width="150" height="150">
   </a>
   
-![logogit](https://user-images.githubusercontent.com/57404639/101440533-ab7a6400-38f5-11eb-9022-28a904c70cf1.png)
 
 
 <!-- TABLE OF CONTENTS -->
