@@ -64,8 +64,14 @@ To get a local copy up and running follow these simple example steps.
 
 ## Statistics / Estadísticas :chart_with_upwards_trend:	
 
+* +15k code lines / +15k de lineas de codigo 👨‍💻
+* +250 work hours / +250 horas de trabajo :alarm_clock:
+* +100 cofee cups / +100 tazas de cafe :coffee:
+* +15 no sleep nights / +15 noches sin dormir 🚫 :sleeping:
 
 ## Authors / Autores :man:
+
+<p>Uriel Damian Liahaff <i>(:pushpin:Buenos Aires, Argentina)<i></p>
 
 ## Licence / Licencia :page_facing_up:
 
