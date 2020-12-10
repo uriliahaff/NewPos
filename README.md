@@ -58,10 +58,18 @@
 
 ## About The App / Acerca De La App :iphone:
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-
+<p>Ya que el target de la app son las personas con discapacidad, deci desarrollar un entorno amigable para el usuario, adaptándose al mismo dependiendo de sus necesidades y dificultades para que no sea un fastidio la búsqueda de empleo porque se que el trabajo es dignificante. </p>
+[Foto Inicio]
+<p>Es así que desarrollamos dos configuraciones especiales, una orientada a las personas con discapacidad visual,  con una navegación por audio y control por voz para facilitar el uso de la misma y una simplificación de la aplicación para generar una interfaz cómoda para el usuario. La otra configuración especial está orientada a las personas con discapacidad intelectual, con una navegación amigable y una interfaz adecuada para el usuario a partir de una simplificación de la misma, del texto y el uso de animaciones e iconos, obviando información innecesaria y haciendo que la navegación por la aplicación sea instintiva gracias a sus colores e ilustraciones. </p>
+<p>El funcionamiento de la aplicación es muy sencilla. Los usuarios deben loguearse en la aplicación.</p>
+[FOTO]
+<p>Una vez que acceden a la misma, pueden cargar su Currículum y subir una foto de ellos mismos.</p>
+[VIDEOS/FOTO]
+<p>El currículum se divide en 4 partes: Educación, Experiencia Laboral, Habilidades e Idiomas, con el objetivo de que el usuario pueda hacer su Currículum lo más completo y prolijo y así dar la mejor impresión a la empresas.</p> 
+[Videos/Foto] 
+<p>La bolsa de empleo de NewPos se basa en una búsqueda inteligente, facilitando los empleos que mejor satisfacen las necesidades del usuario, acercando los mejores empleos para cada uno. El usuario puede ver los datos del empleo, como el nombre de la empresa, los requisitos del mismo, la dirección y los horarios, y aplicar a los mismos si así lo desea.</p> 
+[Fotos/Videos]
+</p>Además, el usuario puede ver todas sus postulaciones: Las pendientes, las rechazadas y en el mejor de los casos, las aceptadas. Cuando se da este matcheo entre las empresas y el usuario, las empresas se comunican a través de la plataforma con los usuarios para tener una entrevista laboral en un ámbito formal. </p>
 
 ## Statistics / Estadísticas :chart_with_upwards_trend:	
 
