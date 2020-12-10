@@ -58,19 +58,24 @@
 
 ## About The App / Acerca De La App :iphone:
 
-<p>Ya que el target de la app son las personas con discapacidad, deci desarrollar un entorno amigable para el usuario, adaptándose al mismo dependiendo de sus necesidades y dificultades para que no sea un fastidio la búsqueda de empleo porque se que el trabajo es dignificante. </p>
-[Foto Inicio]
+<p>Ya que el target de la app son las personas con discapacidad, deci desarrollar un entorno amigable para el usuario, adaptándose al mismo dependiendo de sus necesidades y dificultades para que no sea un fastidio la búsqueda de empleo porque se que el trabajo es dignificante.</p>
 <p>Es así que desarrollamos dos configuraciones especiales, una orientada a las personas con discapacidad visual,  con una navegación por audio y control por voz para facilitar el uso de la misma y una simplificación de la aplicación para generar una interfaz cómoda para el usuario. La otra configuración especial está orientada a las personas con discapacidad intelectual, con una navegación amigable y una interfaz adecuada para el usuario a partir de una simplificación de la misma, del texto y el uso de animaciones e iconos, obviando información innecesaria y haciendo que la navegación por la aplicación sea instintiva gracias a sus colores e ilustraciones. </p>
 <p>El funcionamiento de la aplicación es muy sencilla. Los usuarios deben loguearse en la aplicación.</p>
-[FOTO]
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/57404639/101718505-18216a00-3a80-11eb-9bdf-442aa8c5a780.png" />
+</p>
 <p>Una vez que acceden a la misma, pueden cargar su Currículum y subir una foto de ellos mismos.</p>
-[VIDEOS/FOTO]
 <p>El currículum se divide en 4 partes: Educación, Experiencia Laboral, Habilidades e Idiomas, con el objetivo de que el usuario pueda hacer su Currículum lo más completo y prolijo y así dar la mejor impresión a la empresas.</p> 
-[Videos/Foto] 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/57404639/101719687-9da61980-3a82-11eb-8506-7b2c92f5aeeb.gif" /></p>
 <p>La bolsa de empleo de NewPos se basa en una búsqueda inteligente, facilitando los empleos que mejor satisfacen las necesidades del usuario, acercando los mejores empleos para cada uno. El usuario puede ver los datos del empleo, como el nombre de la empresa, los requisitos del mismo, la dirección y los horarios, y aplicar a los mismos si así lo desea.</p> 
-[Fotos/Videos]
-</p>Además, el usuario puede ver todas sus postulaciones: Las pendientes, las rechazadas y en el mejor de los casos, las aceptadas. Cuando se da este matcheo entre las empresas y el usuario, las empresas se comunican a través de la plataforma con los usuarios para tener una entrevista laboral en un ámbito formal. </p>
-
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/57404639/101719712-a8f94500-3a82-11eb-9431-12453e9c02a5.gif" /></p>
+<p>Además, el usuario puede ver todas sus postulaciones: Las pendientes, las rechazadas y en el mejor de los casos, las aceptadas. Cuando se da este matcheo entre las empresas y el usuario, las empresas se comunican a través de la plataforma con los usuarios para tener una entrevista laboral en un ámbito formal. </p>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/57404639/101719838-efe73a80-3a82-11eb-90c6-0ca14ebe9792.gif" /></p>
+  
+  
 ## Statistics / Estadísticas :chart_with_upwards_trend:	
 
 * +15k code lines / +15k de lineas de codigo 👨‍💻
